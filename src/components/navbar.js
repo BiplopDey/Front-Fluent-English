@@ -6,7 +6,14 @@ class Navbar extends Component {
   render() {
     return (
       <div className="ct-header">
-        <Link to="/" className="img-logo" src={logo} alt="logo"></Link>
+        <Link to="/">
+          <img
+            className="img-logo"
+            src={logo}
+            alt="logo"
+            styles=" size: small"
+          />
+        </Link>
       </div>
     );
   }
