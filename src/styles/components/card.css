@@ -1,0 +1,8 @@
+.card > img {
+  width: 300px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-evenly;
+}

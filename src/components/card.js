@@ -5,21 +5,22 @@ class Card extends Component {
   render() {
     return (
       <div>
-        <div className="ct-card">
+        <div className="card">
           <img
+            className="main-img-card"
             src={this.props.imgURL}
             className="image-card"
             alt={this.props.name}
           />
-          <div>
+          <div className="buttons-container">
             <button>
               <i class="bi-alarm"></i>
             </button>
             <button>
-              <i class="bi-alarm"></i>
+              <i class="bi bi-trash"></i>
             </button>
             <button>
-              <i class="bi-alarm"></i>
+              <i class="bi bi-eye"></i>
             </button>
           </div>
           <h1>{this.props.title}</h1>

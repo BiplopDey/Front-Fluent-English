@@ -4,13 +4,13 @@ import Card from "./card";
 class Cards extends Component {
   render() {
     return (
-      <div>
+      <div className="cards">
         {this.props.data.cards.map((card, index) => {
           return (
             <Card
               imgURL={card.imgURL}
               title={card.imgName}
-              user={card.imgUser}
+              name={card.userName}
               index={index}
             />
           );
