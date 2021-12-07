@@ -1,3 +1,4 @@
-@import "./components/cards.css";
-@import "./components/header.css";
 @import "./components/variables.css";
+@import "./components/cards.css";
+@import "./components/card.css";
+@import "./components/header.css";
