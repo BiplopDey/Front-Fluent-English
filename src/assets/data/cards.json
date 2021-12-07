@@ -4,19 +4,19 @@
       "id": 1,
       "imgName": "Waikiki beach sunset",
       "userName": "Maria",
-      "imgURL": "beach"
+      "imgURL": "https://img.theculturetrip.com/450x/smart/wp-content/uploads/2017/06/barcelona-959076_1280.jpg"
     },
     {
       "id": 2,
       "imgName": "Stars at night",
       "userName": "Belén",
-      "imgURL": "stars"
+      "imgURL": "https://media-cdn.tripadvisor.com/media/photo-s/07/9f/41/aa/stars-by-night.jpg"
     },
     {
       "id": 3,
       "imgName": "Full moon",
       "userName": "Andre",
-      "imgURL": "moon"
+      "imgURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Supermoon_Nov-14-2016-minneapolis.jpg/1200px-Supermoon_Nov-14-2016-minneapolis.jpg"
     }
   ]
 }

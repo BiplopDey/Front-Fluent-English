@@ -1,13 +1,17 @@
 import { Component } from "react";
 import Card from "./card";
+import Cards from "./cards";
 import Navbar from "./navbar";
-
+import data from "../assets/data/cards.json";
 class Home extends Component {
+  state = {
+    cards: data,
+  };
   render() {
     return (
       <div>
         <Navbar />
-        <Card title="hola" name="Mundo" imgURL="https://img.theculturetrip.com/450x/smart/wp-content/uploads/2017/06/barcelona-959076_1280.jpg" />
+        <Cards data={this.state.cards} />
       </div>
     );
   }

@@ -15,6 +15,12 @@ class Card extends Component {
             <button>
               <i class="bi-alarm"></i>
             </button>
+            <button>
+              <i class="bi-alarm"></i>
+            </button>
+            <button>
+              <i class="bi-alarm"></i>
+            </button>
           </div>
           <h1>{this.props.title}</h1>
           <h3>{this.props.name}</h3>
