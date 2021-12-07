@@ -1,0 +1,22 @@
+{
+  "cards": [
+    {
+      "id": 1,
+      "imgName": "Waikiki beach sunset",
+      "userName": "Maria",
+      "imgURL": "beach"
+    },
+    {
+      "id": 2,
+      "imgName": "Stars at night",
+      "userName": "Belén",
+      "imgURL": "stars"
+    },
+    {
+      "id": 3,
+      "imgName": "Full moon",
+      "userName": "Andre",
+      "imgURL": "moon"
+    }
+  ]
+}
