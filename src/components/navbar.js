@@ -7,12 +7,7 @@ class Navbar extends Component {
     return (
       <div className="ct-header">
         <Link to="/">
-          <img
-            className="img-logo"
-            src={logo}
-            alt="logo"
-            styles=" size: small"
-          />
+          <img className="img-logo" src={logo} alt="logo" />
         </Link>
       </div>
     );

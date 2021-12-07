@@ -6,7 +6,7 @@ class Ejemplo extends Component {
     return (
       <div>
         <Navbar />
-        <h1>Hola</h1>
+        {[<h1>Hola</h1>, <h1>Hola</h1>]}
       </div>
     );
   }
