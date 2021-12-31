@@ -11,6 +11,9 @@ class Home extends Component {
     return (
       <div>
         <Navbar />
+        <button type="button" class="btn btn-primary">
+          Primary
+        </button>
         <Cards data={this.state.cards} />
       </div>
     );

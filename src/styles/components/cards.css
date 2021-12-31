@@ -1,4 +1,4 @@
 .cards {
   display: flex;
-  width: 10px;
+  justify-content: space-evenly;
 }
