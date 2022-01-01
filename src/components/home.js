@@ -23,6 +23,14 @@ function Home() {
     });
   }
 
+  function update(id, name) {
+    const index = findIndexById(id);
+    state.wordList[index].name = name;
+    setState({
+      ...state,
+    });
+  }
+
   function add() {
     setState({
       ...state,
@@ -35,18 +43,19 @@ function Home() {
     state.wordList.splice(findIndexById(id), 1);
     setState({
       ...state,
-      wordList: [...state.wordList],
     });
   }
+
   function findIndexById(id) {
-    state.wordList.findIndex((e) => e.id == id);
+    return state.wordList.findIndex((e) => e.id == id);
   }
+
   return (
     <div>
       <Navbar />
       <Search response={state.response} onChange={updateChange} />
       <AddWord word={state.response} add={add} />
-      <Words words={state.wordList} delete={deleteWord} />
+      <Words words={state.wordList} delete={deleteWord} update={update} />
     </div>
   );
 }

@@ -7,7 +7,6 @@ function Search(props) {
         <input
           type="text"
           className="form-control"
-          id="inputPassword2"
           placeholder="Search"
           autoFocus={true}
           value={props.response}
