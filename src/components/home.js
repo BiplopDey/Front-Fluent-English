@@ -7,8 +7,12 @@ import Words from "./words";
 function Home() {
   const [state, setState] = React.useState({
     response: "",
-    wordList: ["Hello", "world", "hola", "mundo"],
+    wordList: [new Word("mundo"), new Word("Hola"), new Word("Hello")],
   });
+
+  function Word(name) {
+    this.name = name;
+  }
 
   function updateChange(event) {
     setState({
@@ -17,11 +21,18 @@ function Home() {
     });
   }
 
+  function add() {
+    setState({
+      ...state,
+      wordList: [new Word(state.response), ...state.wordList],
+    });
+  }
+
   return (
     <div>
       <Navbar />
       <Search response={state.response} onChange={updateChange} />
-      <AddWord word={state.response} />
+      <AddWord word={state.response} add={add} />
       <Words words={state.wordList} />
     </div>
   );

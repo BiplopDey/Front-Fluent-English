@@ -3,7 +3,7 @@ function Words(props) {
   return (
     <ul>
       {props.words.map((word, index) => {
-        return <Word name={word} />;
+        return <Word name={word.name} />;
       })}
     </ul>
   );
