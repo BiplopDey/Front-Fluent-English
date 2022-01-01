@@ -1,5 +1,4 @@
 import { Component } from "react";
-import eye from "../assets/ico/eye.svg";
 
 class Card extends Component {
   render() {
@@ -14,13 +13,13 @@ class Card extends Component {
           />
           <div className="buttons-container">
             <button>
-              <i class="bi-alarm"></i>
+              <i className="bi-alarm"></i>
             </button>
             <button>
-              <i class="bi bi-trash"></i>
+              <i className="bi bi-trash"></i>
             </button>
             <button>
-              <i class="bi bi-eye"></i>
+              <i className="bi bi-eye"></i>
             </button>
           </div>
           <h1>{this.props.title}</h1>

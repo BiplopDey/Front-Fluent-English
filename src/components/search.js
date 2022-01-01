@@ -2,19 +2,20 @@ import { Component } from "react";
 
 function Search(props) {
   return (
-    <form class="row g-3">
-      <div class="col-auto">
+    <form className="row g-3">
+      <div className="col-auto">
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           id="inputPassword2"
           placeholder="Search"
+          autoFocus={true}
           value={props.response}
           onChange={props.onChange}
         />
       </div>
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary mb-3">
+      <div className="col-auto">
+        <button type="submit" className="btn btn-primary mb-3">
           Search
         </button>
       </div>
