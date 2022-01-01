@@ -1,9 +1,7 @@
-import React, { Component } from "react";
-import Card from "./card";
-import Cards from "./cards";
+import React from "react";
 import Navbar from "./navbar";
-import data from "../assets/data/cards.json";
 import Search from "./search";
+import addWord from "./addWord";
 
 function Home() {
   const [state, setState] = React.useState({
@@ -21,7 +19,7 @@ function Home() {
     <div>
       <Navbar />
       <Search response={state.response} onChange={updateChange} />
-      <h1>{state.response}</h1>
+      <addWord word={state.response} />
     </div>
   );
 }
