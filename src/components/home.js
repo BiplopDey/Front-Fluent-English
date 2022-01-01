@@ -1,11 +1,13 @@
 import React from "react";
 import Navbar from "./navbar";
 import Search from "./search";
-import addWord from "./addWord";
+import AddWord from "./addWord";
+import Words from "./words";
 
 function Home() {
   const [state, setState] = React.useState({
     response: "",
+    wordList: ["Hello", "world", "hola", "mundo"],
   });
 
   function updateChange(event) {
@@ -19,7 +21,8 @@ function Home() {
     <div>
       <Navbar />
       <Search response={state.response} onChange={updateChange} />
-      <addWord word={state.response} />
+      <AddWord word={state.response} />
+      <Words words={state.wordList} />
     </div>
   );
 }

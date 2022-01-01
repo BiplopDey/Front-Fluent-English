@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-function addWord(props) {
+function AddWord(props) {
   return (
     <div>
       <h1>{props.word}</h1>
@@ -11,4 +11,4 @@ function addWord(props) {
   );
 }
 
-export default addWord;
+export default AddWord;
