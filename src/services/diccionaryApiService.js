@@ -2,6 +2,7 @@ import axios from "axios";
 const url = "http://localhost:3000/dicctionary";
 
 export const diccionaryApiService = {
+  myUrl: url,
   create(word) {
     axios.post(url, word);
   },

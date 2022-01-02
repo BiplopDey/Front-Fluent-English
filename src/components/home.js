@@ -1,32 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./navbar";
 import Search from "./search";
 import AddWord from "./addWord";
 import Words from "./words";
 import { diccionaryApiService } from "../services/diccionaryApiService";
+import axios from "axios";
+const url = diccionaryApiService.myUrl;
 function Home() {
-  const initialWords = [
-    {
-      id: 0,
-      name: "hello",
-    },
-    {
-      id: 1,
-      name: "Word",
-    },
-  ];
-
-  const [id, updateId] = useState(2);
   const [state, setState] = useState({
     response: "",
-    wordList: initialWords,
+    wordList: [],
   });
 
-  function Word(name) {
-    updateId(id + 1);
-    this.id = id;
-    this.name = name;
-  }
+  useEffect(() => {
+    getAll();
+  });
 
   function updateChange(event) {
     setState({
@@ -44,20 +32,30 @@ function Home() {
   }
 
   function add() {
-    let newWord = new Word(state.response);
-    diccionaryApiService.create({ name: newWord.name });
-    state.wordList.unshift(newWord);
-    setState({
-      ...state,
+    axios.post(url, { name: state.response }).then((res) => {
+      state.wordList.unshift(res.data);
+      setState({
+        ...state,
+      });
+    });
+    getAll();
+  }
+
+  function getAll() {
+    axios.get(url).then((response) => {
+      setState({ ...state, wordList: response.data });
     });
   }
 
   function deleteWord(id) {
-    //console.log(findIndexById(id));
-    state.wordList.splice(findIndexById(id), 1);
-    setState({
-      ...state,
+    axios.delete(url + `/${id}`).then(() => {
+      state.wordList.splice(id, 1);
+      setState({
+        ...state,
+      });
     });
+    //diccionaryApiService.deleteById(id);
+    getAll();
   }
 
   function findIndexById(id) {
