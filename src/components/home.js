@@ -1,18 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./navbar";
 import Search from "./search";
 import AddWord from "./addWord";
 import Words from "./words";
 
 function Home() {
-  let id = 0;
-  const [state, setState] = React.useState({
+  const initialWords = [
+    {
+      id: 0,
+      name: "hello",
+    },
+    {
+      id: 1,
+      name: "Word",
+    },
+  ];
+
+  const [id, updateId] = useState(2);
+  const [state, setState] = useState({
     response: "",
-    wordList: [new Word("mundo"), new Word("Hola"), new Word("Hello")],
+    wordList: initialWords,
   });
 
   function Word(name) {
-    this.id = id++;
+    updateId(id + 1);
+    this.id = id;
     this.name = name;
   }
 
@@ -32,14 +44,15 @@ function Home() {
   }
 
   function add() {
+    let newWord = new Word(state.response);
+    state.wordList.unshift(newWord);
     setState({
       ...state,
-      wordList: [new Word(state.response), ...state.wordList],
     });
   }
 
   function deleteWord(id) {
-    console.log(findIndexById(id));
+    //console.log(findIndexById(id));
     state.wordList.splice(findIndexById(id), 1);
     setState({
       ...state,
