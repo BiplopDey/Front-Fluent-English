@@ -3,7 +3,7 @@ import Navbar from "./navbar";
 import Search from "./search";
 import AddWord from "./addWord";
 import Words from "./words";
-
+import { diccionaryApiService } from "../services/diccionaryApiService";
 function Home() {
   const initialWords = [
     {
@@ -45,6 +45,7 @@ function Home() {
 
   function add() {
     let newWord = new Word(state.response);
+    diccionaryApiService.create({ name: newWord.name });
     state.wordList.unshift(newWord);
     setState({
       ...state,
