@@ -6,68 +6,58 @@ import Words from "./words";
 import { diccionaryApiService } from "../services/diccionaryApiService";
 import axios from "axios";
 const url = diccionaryApiService.myUrl;
+
 function Home() {
-  const [state, setState] = useState({
-    response: "",
-    wordList: [],
-  });
+  const [response, setResponse] = useState("");
+  const [wordList, setWordList] = useState([]);
 
   useEffect(() => {
     getAll();
-  });
+  }, []);
 
   function updateChange(event) {
-    setState({
-      ...state,
-      response: event.target.value,
-    });
+    setResponse(event.target.value);
   }
 
   function update(id, name) {
-    const index = findIndexById(id);
-    state.wordList[index].name = name;
-    setState({
-      ...state,
+    const word = { id: id, name: name };
+    axios.patch(url + `/${id}`, word).then((res) => {
+      wordList[findIndexById(id)] = res.data;
+      setWordList([...wordList]);
     });
   }
 
   function add() {
-    axios.post(url, { name: state.response }).then((res) => {
-      state.wordList.unshift(res.data);
-      setState({
-        ...state,
-      });
+    axios.post(url, { name: response }).then((res) => {
+      setWordList([res.data, ...wordList]);
     });
     getAll();
   }
 
   function getAll() {
     axios.get(url).then((response) => {
-      setState({ ...state, wordList: response.data });
+      setWordList(response.data);
     });
   }
 
   function deleteWord(id) {
     axios.delete(url + `/${id}`).then(() => {
-      state.wordList.splice(id, 1);
-      setState({
-        ...state,
-      });
+      wordList.splice(id, 1);
+      setWordList([...wordList]);
     });
-    //diccionaryApiService.deleteById(id);
     getAll();
   }
 
   function findIndexById(id) {
-    return state.wordList.findIndex((e) => e.id == id);
+    return wordList.findIndex((e) => e.id == id);
   }
 
   return (
     <div>
       <Navbar />
-      <Search response={state.response} onChange={updateChange} />
-      <AddWord word={state.response} add={add} />
-      <Words words={state.wordList} delete={deleteWord} update={update} />
+      <Search response={response} onChange={updateChange} />
+      <AddWord word={response} add={add} />
+      <Words words={wordList} delete={deleteWord} update={update} />
     </div>
   );
 }

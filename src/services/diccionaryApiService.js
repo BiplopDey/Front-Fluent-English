@@ -12,7 +12,7 @@ export const diccionaryApiService = {
   fetchAll() {
     return axios.get(url).then((res) => res.data);
   },
-  update(movie) {
-    axios.patch(url + `/${movie.id}`, movie);
+  update(word) {
+    axios.patch(url + `/${word.id}`, word);
   },
 };
