@@ -7,13 +7,17 @@ import { diccionaryApiService } from "../services/diccionaryApiService";
 import axios from "axios";
 const url = diccionaryApiService.myUrl;
 
+const dicctionary = axios.create({
+  baseURL: diccionaryApiService.myUrl,
+});
+
 function Home() {
   const [response, setResponse] = useState("");
   const [wordList, setWordList] = useState([]);
 
   useEffect(() => {
     getAll();
-  }, []);
+  }, []); // the [], only ejectus the first time when loading
 
   function updateChange(event) {
     setResponse(event.target.value);
@@ -28,15 +32,15 @@ function Home() {
   }
 
   function add() {
-    axios.post(url, { name: response }).then((res) => {
+    dicctionary.post(url, { name: response }).then((res) => {
       setWordList([res.data, ...wordList]);
     });
-    getAll();
+    //getAll();
   }
 
   function getAll() {
     axios.get(url).then((response) => {
-      setWordList(response.data);
+      setWordList(response.data.reverse());
     });
   }
 
@@ -45,7 +49,7 @@ function Home() {
       wordList.splice(id, 1);
       setWordList([...wordList]);
     });
-    getAll();
+    //getAll();
   }
 
   function findIndexById(id) {
