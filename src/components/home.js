@@ -14,8 +14,10 @@ const dicctionary = axios.create({
 function Home() {
   const [response, setResponse] = useState("");
   const [wordList, setWordList] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     getAll();
   }, []); // the [], only ejectus the first time when loading
 
@@ -41,6 +43,7 @@ function Home() {
   function getAll() {
     axios.get(url).then((response) => {
       setWordList(response.data.reverse());
+      setLoading(false);
     });
   }
 
@@ -61,7 +64,10 @@ function Home() {
       <Navbar />
       <Search response={response} onChange={updateChange} />
       <AddWord word={response} add={add} />
-      <Words words={wordList} delete={deleteWord} update={update} />
+      {loading && <h1>Is loading</h1>}
+      {wordList.length > 0 && (
+        <Words words={wordList} delete={deleteWord} update={update} />
+      )}
     </div>
   );
 }
