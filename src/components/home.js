@@ -17,30 +17,33 @@ function Home() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     getAll();
-  }, []); // the [], only ejectus the first time when loading
+  }, []);
 
   function updateChange(event) {
     setResponse(event.target.value);
   }
 
   function update(id, name) {
+    setLoading(true);
     const word = { id: id, name: name };
     axios.patch(url + `/${id}`, word).then((res) => {
       wordList[findIndexById(id)] = res.data;
       setWordList([...wordList]);
+      setLoading(false);
     });
   }
 
   function add() {
+    setLoading(true);
     dicctionary.post(url, { name: response }).then((res) => {
       setWordList([res.data, ...wordList]);
+      setLoading(false);
     });
-    //getAll();
   }
 
   function getAll() {
+    setLoading(false);
     axios.get(url).then((response) => {
       setWordList(response.data.reverse());
       setLoading(false);
@@ -49,15 +52,12 @@ function Home() {
 
   function deleteWord(id) {
     axios.delete(url + `/${id}`).then(() => {
-      wordList.splice(id, 1);
+      wordList.splice(findIndexById(id), 1);
       setWordList([...wordList]);
     });
-    //getAll();
   }
 
-  function findIndexById(id) {
-    return wordList.findIndex((e) => e.id == id);
-  }
+  findIndexById = (id) => wordList.findIndex((e) => e.id == id);
 
   return (
     <div>
