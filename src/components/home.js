@@ -7,10 +7,6 @@ import { diccionaryApiService } from "../services/diccionaryApiService";
 import axios from "axios";
 const url = diccionaryApiService.myUrl;
 
-const dicctionary = axios.create({
-  baseURL: diccionaryApiService.myUrl,
-});
-
 function Home() {
   const [response, setResponse] = useState("");
   const [wordList, setWordList] = useState([]);
@@ -36,8 +32,8 @@ function Home() {
 
   function add() {
     setLoading(true);
-    dicctionary.post(url, { name: response }).then((res) => {
-      setWordList([res.data, ...wordList]);
+    diccionaryApiService.create({ name: response }).then((data) => {
+      setWordList([data, ...wordList]);
       setLoading(false);
     });
   }
