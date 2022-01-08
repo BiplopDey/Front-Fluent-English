@@ -9,7 +9,7 @@ export const diccionaryApiService = {
       const response = await axios.post(url, word);
       return response.data;
     } catch (err) {
-      return err;
+      return err.response;
     }
   },
 
@@ -18,7 +18,7 @@ export const diccionaryApiService = {
       await axios.delete(url + `/${id}`);
       return id;
     } catch (err) {
-      return err;
+      return err.response;
     }
   },
 
@@ -27,7 +27,7 @@ export const diccionaryApiService = {
       const response = await axios.get(url);
       return response.data.reverse();
     } catch (err) {
-      return err;
+      return err.response;
     }
   },
   async update(word) {
@@ -35,7 +35,7 @@ export const diccionaryApiService = {
       const response = await axios.patch(url + `/${word.id}`, word);
       return response.data;
     } catch (err) {
-      return err;
+      return err.response;
     }
   },
 };

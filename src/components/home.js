@@ -6,11 +6,13 @@ import Words from "./words";
 import { diccionaryApiService } from "../services/diccionaryApiService";
 import axios from "axios";
 import Loader from "./loader";
+import ErrorMesaje from "./errorMessaje";
 
 function Home() {
   const [response, setResponse] = useState("");
   const [wordList, setWordList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     getAll();
@@ -40,10 +42,17 @@ function Home() {
 
   function getAll() {
     setLoading(true);
-    diccionaryApiService.fetchAll().then((data) => {
-      setWordList(data);
-      setLoading(false);
-    });
+    diccionaryApiService
+      .fetchAll()
+      .then((data) => {
+        //console.log(data);
+        setWordList(data);
+        setLoading(false);
+      })
+      .catch((errorResponse) => {
+        setLoading(false);
+        setError(errorResponse);
+      });
   }
 
   function deleteWord(id) {
@@ -62,6 +71,8 @@ function Home() {
       <Navbar />
       <Search response={response} onChange={updateChange} />
       <AddWord word={response} add={add} />
+      {error && <ErrorMesaje errorResponse={error} />}
+
       <Words
         words={wordList}
         loader={loading}
