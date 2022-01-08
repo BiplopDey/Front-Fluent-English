@@ -25,7 +25,12 @@ export const diccionaryApiService = {
       return err;
     }
   },
-  update(word) {
-    axios.patch(url + `/${word.id}`, word);
+  async update(word) {
+    try {
+      const response = await axios.patch(url + `/${word.id}`, word);
+      return response.data;
+    } catch (err) {
+      return err;
+    }
   },
 };

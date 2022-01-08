@@ -23,8 +23,8 @@ function Home() {
   function update(id, name) {
     setLoading(true);
     const word = { id: id, name: name };
-    axios.patch(url + `/${id}`, word).then((res) => {
-      wordList[findIndexById(id)] = res.data;
+    diccionaryApiService.update(word).then((data) => {
+      wordList[findIndexById(id)] = data;
       setWordList([...wordList]);
       setLoading(false);
     });
