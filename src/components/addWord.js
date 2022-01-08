@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
+import AddWordForm from "./addWordForm";
 
-function AddWord(props) {
+function AddWord({ name, add }) {
+  const [isAdding, setIsAdding] = useState(false);
+
+  if (isAdding) {
+    return <AddWordForm name={name} add={add} setIsAdding={setIsAdding} />;
+  }
+
   return (
     <div>
-      <h1>{props.word}</h1>
-      <button type="button" className="btn btn-primary" onClick={props.add}>
-        Add
+      <h1>{name}</h1>
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => {
+          setIsAdding(true);
+        }}
+      >
+        <i class="bi bi-plus-square-fill"></i>
       </button>
     </div>
   );

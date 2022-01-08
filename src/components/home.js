@@ -32,9 +32,9 @@ function Home() {
     });
   }
 
-  function addWord() {
+  function addWord(word) {
     setLoading(true);
-    diccionaryApiService.create({ name: response }).then((data) => {
+    diccionaryApiService.create(word).then((data) => {
       setWordList([data, ...wordList]);
       setLoading(false);
     });
@@ -71,9 +71,8 @@ function Home() {
     <div>
       <Navbar />
       <Search response={response} onChange={updateChange} />
-      <AddWord word={response} add={addWord} />
+      <AddWord name={response} add={addWord} />
       {error && <ErrorMesaje errorResponse={error} />}
-
       <Words
         words={wordList}
         loader={loading}

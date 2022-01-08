@@ -47,8 +47,8 @@ function Word({ word, updateWord, deleteWord }) {
     <li>
       <h1>Name: {word.name}</h1>
       <h3>id: {word.id}</h3>
-      <h3>Transcript: </h3>
-      <h2>Definition: </h2>
+      <h3>Transcript: {word.transcription} </h3>
+      <h2>Definition: {word.definition} </h2>
       <button
         type="button"
         className="btn btn-danger btn-sm"
