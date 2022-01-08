@@ -1,5 +1,9 @@
+import Loader from "./loader";
 import Word from "./word";
+
 function Words(props) {
+  if (props.loader) return <Loader />;
+
   return (
     <ul>
       {props.words.map((word) => (

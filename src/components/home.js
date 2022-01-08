@@ -5,7 +5,7 @@ import AddWord from "./addWord";
 import Words from "./words";
 import { diccionaryApiService } from "../services/diccionaryApiService";
 import axios from "axios";
-const url = diccionaryApiService.myUrl;
+import Loader from "./loader";
 
 function Home() {
   const [response, setResponse] = useState("");
@@ -62,10 +62,12 @@ function Home() {
       <Navbar />
       <Search response={response} onChange={updateChange} />
       <AddWord word={response} add={add} />
-      {loading && <h1>Is loading</h1>}
-      {wordList.length > 0 && (
-        <Words words={wordList} delete={deleteWord} update={update} />
-      )}
+      <Words
+        words={wordList}
+        loader={loading}
+        delete={deleteWord}
+        update={update}
+      />
     </div>
   );
 }
