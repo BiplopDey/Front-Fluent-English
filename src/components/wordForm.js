@@ -1,40 +1,36 @@
 import React, { useState } from "react";
 
-function AddWordForm({ name, add, setIsAdding }) {
-  const [word, setWord] = useState({
-    name: name,
-    transcription: "",
-    definition: "",
-  });
+function WordForm({ word, operation, setDisplay }) {
+  const [wordState, setWord] = useState({ ...word });
 
   function addWord() {
-    add(word);
-    setIsAdding(false);
+    operation(wordState);
+    setDisplay(false);
   }
 
   function updateChangeName(event) {
     setWord({
-      ...word,
+      ...wordState,
       name: event.target.value,
     });
   }
 
   function updateChangeTrans(event) {
     setWord({
-      ...word,
+      ...wordState,
       transcription: event.target.value,
     });
   }
 
   function updateChangeDef(event) {
     setWord({
-      ...word,
+      ...wordState,
       definition: event.target.value,
     });
   }
 
   function cancelEditing() {
-    setIsAdding(false);
+    setDisplay(false);
   }
 
   return (
@@ -50,7 +46,7 @@ function AddWordForm({ name, add, setIsAdding }) {
           className="form-control"
           aria-label="Default"
           aria-describedby="inputGroup-sizing-default"
-          value={word.name}
+          value={wordState.name}
           onChange={updateChangeName}
         />
       </div>
@@ -66,7 +62,7 @@ function AddWordForm({ name, add, setIsAdding }) {
           className="form-control"
           aria-label="Default"
           aria-describedby="inputGroup-sizing-default"
-          value={word.transcription}
+          value={wordState.transcription}
           onChange={updateChangeTrans}
         />
       </div>
@@ -82,7 +78,7 @@ function AddWordForm({ name, add, setIsAdding }) {
           className="form-control"
           aria-label="Default"
           aria-describedby="inputGroup-sizing-default"
-          value={word.definition}
+          value={wordState.definition}
           onChange={updateChangeDef}
         />
       </div>
@@ -97,4 +93,4 @@ function AddWordForm({ name, add, setIsAdding }) {
   );
 }
 
-export default AddWordForm;
+export default WordForm;

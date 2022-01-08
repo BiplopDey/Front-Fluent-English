@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import AddWordForm from "./addWordForm";
+import WordForm from "./wordForm";
 
 function AddWord({ name, add }) {
   const [isAdding, setIsAdding] = useState(false);
 
   if (isAdding) {
-    return <AddWordForm name={name} add={add} setIsAdding={setIsAdding} />;
+    const word = { name: name };
+    return <WordForm word={word} operation={add} setDisplay={setIsAdding} />;
   }
 
   return (
