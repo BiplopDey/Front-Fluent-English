@@ -18,35 +18,10 @@ function Word({ word, updateWord, deleteWord }) {
   }
 
   if (isEditing) {
-    return <WordForm word={word} operation={updateWord} />;
+    return (
+      <WordForm word={word} operation={updateWord} setDisplay={setIsEditing} />
+    );
   }
-
-  const editing = (
-    <li>
-      <input
-        type="text"
-        className="form-control"
-        value={wordState.name}
-        onChange={updateChange}
-      />
-      <h3>Transcript: </h3>
-      <h2>Definition: </h2>
-      <button
-        type="button"
-        className="btn btn-danger btn-sm"
-        onClick={() => deleteWord(wordState)}
-      >
-        Delete
-      </button>
-      <button
-        type="button"
-        className="btn btn-secondary btn-sm"
-        onClick={update}
-      >
-        Update
-      </button>
-    </li>
-  );
 
   const looking = (
     <li>
@@ -73,7 +48,7 @@ function Word({ word, updateWord, deleteWord }) {
     </li>
   );
 
-  return isEditing ? editing : looking;
+  return looking;
 }
 
 export default Word;

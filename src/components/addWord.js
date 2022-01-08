@@ -19,7 +19,7 @@ function AddWord({ name, add }) {
           setIsAdding(true);
         }}
       >
-        <i class="bi bi-plus-square-fill"></i>
+        <i className="bi bi-plus-square-fill"></i>
       </button>
     </div>
   );
