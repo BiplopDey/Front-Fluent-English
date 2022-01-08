@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import WordForm from "./wordForm";
 
 function Word({ word, updateWord, deleteWord }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -14,6 +15,10 @@ function Word({ word, updateWord, deleteWord }) {
       ...wordState,
       name: event.target.value,
     });
+  }
+
+  if (isEditing) {
+    return <WordForm word={word} operation={updateWord} />;
   }
 
   const editing = (
