@@ -22,17 +22,17 @@ function Home() {
     setResponse(event.target.value);
   }
 
-  function update(id, name) {
+  function updateWord(word) {
     setLoading(true);
-    const word = { id: id, name: name };
+
     diccionaryApiService.update(word).then((data) => {
-      wordList[findIndexById(id)] = data;
+      wordList[findIndexById(word.id)] = data;
       setWordList([...wordList]);
       setLoading(false);
     });
   }
 
-  function add() {
+  function addWord() {
     setLoading(true);
     diccionaryApiService.create({ name: response }).then((data) => {
       setWordList([data, ...wordList]);
@@ -55,7 +55,8 @@ function Home() {
       });
   }
 
-  function deleteWord(id) {
+  function deleteWord(word) {
+    const id = word.id;
     setLoading(true);
     diccionaryApiService.deleteById(id).then((id) => {
       wordList.splice(findIndexById(id), 1);
@@ -70,14 +71,14 @@ function Home() {
     <div>
       <Navbar />
       <Search response={response} onChange={updateChange} />
-      <AddWord word={response} add={add} />
+      <AddWord word={response} add={addWord} />
       {error && <ErrorMesaje errorResponse={error} />}
 
       <Words
         words={wordList}
         loader={loading}
-        delete={deleteWord}
-        update={update}
+        deleteWord={deleteWord}
+        updateWord={updateWord}
       />
     </div>
   );

@@ -1,10 +1,10 @@
 import Loader from "./loader";
 import Word from "./word";
 
-function Words(props) {
-  if (props.loader) return <Loader />;
+function Words({ words, loader, deleteWord, updateWord }) {
+  if (loader) return <Loader />;
 
-  if (props.words.length === 0)
+  if (words.length === 0)
     return (
       <ul>
         <li>No data</li>
@@ -13,13 +13,12 @@ function Words(props) {
 
   return (
     <ul>
-      {props.words.map((word) => (
+      {words.map((word) => (
         <Word
           key={word.id}
-          delete={props.delete}
-          name={word.name}
-          id={word.id}
-          update={props.update}
+          deleteWord={deleteWord}
+          word={word}
+          updateWord={updateWord}
         />
       ))}
     </ul>

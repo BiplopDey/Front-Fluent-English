@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
-function Word(props) {
-  const [isEditing, isEditingState] = useState(false);
-  const [wordUpdate, wordState] = useState({ name: props.name });
+function Word({ word, updateWord, deleteWord }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [wordState, setWord] = useState({ ...word });
 
   function update() {
-    isEditingState(false);
-    props.update(props.id, wordUpdate.name);
+    setIsEditing(false);
+    updateWord(wordState);
   }
 
   function updateChange(event) {
-    wordState({
-      ...wordUpdate,
+    setWord({
+      ...wordState,
       name: event.target.value,
     });
   }
@@ -21,7 +21,7 @@ function Word(props) {
       <input
         type="text"
         className="form-control"
-        value={wordUpdate.name}
+        value={wordState.name}
         onChange={updateChange}
       />
       <h3>Transcript: </h3>
@@ -29,7 +29,7 @@ function Word(props) {
       <button
         type="button"
         className="btn btn-danger btn-sm"
-        onClick={() => props.delete(props.id)}
+        onClick={() => deleteWord(wordState)}
       >
         Delete
       </button>
@@ -45,14 +45,14 @@ function Word(props) {
 
   const looking = (
     <li>
-      <h1>Name: {props.name}</h1>
-      <h3>id: {props.id}</h3>
+      <h1>Name: {word.name}</h1>
+      <h3>id: {word.id}</h3>
       <h3>Transcript: </h3>
       <h2>Definition: </h2>
       <button
         type="button"
         className="btn btn-danger btn-sm"
-        onClick={() => props.delete(props.id)}
+        onClick={() => deleteWord(wordState)}
       >
         Delete
       </button>
@@ -60,7 +60,7 @@ function Word(props) {
         type="button"
         className="btn btn-secondary btn-sm"
         onClick={() => {
-          isEditingState(true);
+          setIsEditing(true);
         }}
       >
         Edit
