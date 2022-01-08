@@ -9,8 +9,14 @@ export const diccionaryApiService = {
   deleteById(id) {
     axios.delete(url + `/${id}`);
   },
-  fetchAll() {
-    return axios.get(url).then((res) => res.data);
+
+  async fetchAll() {
+    try {
+      const response = await axios.get(url);
+      return response.data.reverse();
+    } catch (err) {
+      return err;
+    }
   },
   update(word) {
     axios.patch(url + `/${word.id}`, word);

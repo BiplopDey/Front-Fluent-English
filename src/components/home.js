@@ -43,9 +43,9 @@ function Home() {
   }
 
   function getAll() {
-    setLoading(false);
-    axios.get(url).then((response) => {
-      setWordList(response.data.reverse());
+    setLoading(true);
+    diccionaryApiService.fetchAll().then((data) => {
+      setWordList(data);
       setLoading(false);
     });
   }
@@ -57,7 +57,7 @@ function Home() {
     });
   }
 
-  findIndexById = (id) => wordList.findIndex((e) => e.id == id);
+  const findIndexById = (id) => wordList.findIndex((e) => e.id == id);
 
   return (
     <div>
