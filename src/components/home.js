@@ -47,9 +47,11 @@ function Home() {
   }
 
   function deleteWord(id) {
-    axios.delete(url + `/${id}`).then(() => {
+    setLoading(true);
+    diccionaryApiService.deleteById(id).then((id) => {
       wordList.splice(findIndexById(id), 1);
       setWordList([...wordList]);
+      setLoading(false);
     });
   }
 

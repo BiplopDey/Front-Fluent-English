@@ -13,8 +13,13 @@ export const diccionaryApiService = {
     }
   },
 
-  deleteById(id) {
-    axios.delete(url + `/${id}`);
+  async deleteById(id) {
+    try {
+      await axios.delete(url + `/${id}`);
+      return id;
+    } catch (err) {
+      return err;
+    }
   },
 
   async fetchAll() {
