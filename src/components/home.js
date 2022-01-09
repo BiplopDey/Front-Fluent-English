@@ -13,6 +13,7 @@ function Home() {
   const [wordList, setWordList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [db, setDb] = useState([]);
 
   useEffect(() => {
     getAll();

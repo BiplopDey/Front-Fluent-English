@@ -7,7 +7,7 @@ function AddWord({ name, add }) {
   if (isAdding) {
     const word = { name: name };
     return (
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col"></th>
