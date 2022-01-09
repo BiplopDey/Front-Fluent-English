@@ -3,19 +3,6 @@ import WordForm from "./wordForm";
 
 function Word({ word, updateWord, deleteWord }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [wordState, setWord] = useState({ ...word });
-
-  function update() {
-    setIsEditing(false);
-    updateWord(wordState);
-  }
-
-  function updateChange(event) {
-    setWord({
-      ...wordState,
-      name: event.target.value,
-    });
-  }
 
   if (isEditing) {
     return (
@@ -23,8 +10,8 @@ function Word({ word, updateWord, deleteWord }) {
     );
   }
 
-  const looking = (
-    <li>
+  return (
+    <li className="list-group-item">
       <h1>Name: {word.name}</h1>
       <h3>id: {word.id}</h3>
       <h3>Transcript: {word.transcription} </h3>
@@ -32,7 +19,7 @@ function Word({ word, updateWord, deleteWord }) {
       <button
         type="button"
         className="btn btn-danger btn-sm"
-        onClick={() => deleteWord(wordState)}
+        onClick={() => deleteWord(word)}
       >
         Delete
       </button>
@@ -47,8 +34,6 @@ function Word({ word, updateWord, deleteWord }) {
       </button>
     </li>
   );
-
-  return looking;
 }
 
 export default Word;
