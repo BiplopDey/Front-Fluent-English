@@ -20,18 +20,22 @@ function Home() {
     getAll();
   }, []);
 
+  useEffect(() => {
+    setWordList([...WordListing.startsWith(db, response)]);
+    // console.log(response);
+  }, [db, response]);
+
   function updateChange(event) {
-    response = event.target.value;
-    setResponse(response);
-    //response could be "", but str.startsWith("") is always true
-    setWordList([...WordListing.empiezaCon(db, response)]);
+    //  response = event.target.value;
+    setResponse(event.target.value);
   }
 
   function updateWord(word) {
     setLoading(true);
     diccionaryApiService.update(word).then((data) => {
-      wordList[findIndexById(word.id)] = data;
-      setWordList([...wordList]);
+      const index = findIndexById(db, word.id);
+      db[index] = data;
+      setDb([...db]);
       setLoading(false);
     });
   }
@@ -39,7 +43,7 @@ function Home() {
   function addWord(word) {
     setLoading(true);
     diccionaryApiService.create(word).then((data) => {
-      setWordList([data, ...wordList]);
+      setDb([data, ...db]);
       setLoading(false);
     });
   }
@@ -64,13 +68,14 @@ function Home() {
     const id = word.id;
     setLoading(true);
     diccionaryApiService.deleteById(id).then((id) => {
-      wordList.splice(findIndexById(id), 1);
-      setWordList([...wordList]);
+      const index = findIndexById(db, id);
+      db.splice(index, 1);
+      setDb([...db]);
       setLoading(false);
     });
   }
 
-  const findIndexById = (id) => wordList.findIndex((e) => e.id == id);
+  const findIndexById = (list, id) => list.findIndex((e) => e.id == id);
 
   return (
     <div>
@@ -84,13 +89,13 @@ function Home() {
         deleteWord={deleteWord}
         updateWord={updateWord}
       />
-      <h1>DataBase</h1>
+      {/* <h1>DataBase</h1>
       <Words
         words={db}
         loader={loading}
         deleteWord={deleteWord}
         updateWord={updateWord}
-      />
+      /> */}
     </div>
   );
 }
