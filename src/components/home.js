@@ -7,9 +7,10 @@ import { diccionaryApiService } from "../services/diccionaryApiService";
 import axios from "axios";
 import Loader from "./loader";
 import ErrorMesaje from "./errorMessaje";
+import { WordListing } from "../services/wordListing";
 
 function Home() {
-  const [response, setResponse] = useState("");
+  let [response, setResponse] = useState("");
   const [wordList, setWordList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,12 +21,14 @@ function Home() {
   }, []);
 
   function updateChange(event) {
-    setResponse(event.target.value);
+    response = event.target.value;
+    setResponse(response);
+    //response could be "", but str.startsWith("") is always true
+    setWordList([...WordListing.empiezaCon(db, response)]);
   }
 
   function updateWord(word) {
     setLoading(true);
-
     diccionaryApiService.update(word).then((data) => {
       wordList[findIndexById(word.id)] = data;
       setWordList([...wordList]);
@@ -46,8 +49,9 @@ function Home() {
     diccionaryApiService
       .fetchAll()
       .then((data) => {
-        //console.log(data);
+        console.log("getting data");
         setWordList(data);
+        setDb([...data]);
         setLoading(false);
       })
       .catch((errorResponse) => {
@@ -76,6 +80,13 @@ function Home() {
       {error && <ErrorMesaje errorResponse={error} />}
       <Words
         words={wordList}
+        loader={loading}
+        deleteWord={deleteWord}
+        updateWord={updateWord}
+      />
+      <h1>DataBase</h1>
+      <Words
+        words={db}
         loader={loading}
         deleteWord={deleteWord}
         updateWord={updateWord}

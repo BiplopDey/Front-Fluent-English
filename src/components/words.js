@@ -34,19 +34,6 @@ function Words({ words, loader, deleteWord, updateWord }) {
       </tbody>
     </table>
   );
-
-  return (
-    <ul className="list-group">
-      {words.map((word) => (
-        <Word
-          key={word.id}
-          deleteWord={deleteWord}
-          word={word}
-          updateWord={updateWord}
-        />
-      ))}
-    </ul>
-  );
 }
 
 export default Words;
