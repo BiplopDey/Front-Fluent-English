@@ -9,31 +9,34 @@ function Word({ word, updateWord, deleteWord }) {
       <WordForm word={word} operation={updateWord} setDisplay={setIsEditing} />
     );
   }
+  const row = (
+    <tr>
+      <th scope="row">{word.id}</th>
+      <td>{word.name}</td>
+      <td>{word.transcription}</td>
+      <td>{word.definition}</td>
+      <td>
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm"
+          onClick={() => {
+            setIsEditing(true);
+          }}
+        >
+          Edit
+        </button>
 
-  return (
-    <li className="list-group-item">
-      <h1>Name: {word.name}</h1>
-      <h3>id: {word.id}</h3>
-      <h3>Transcript: {word.transcription} </h3>
-      <h2>Definition: {word.definition} </h2>
-      <button
-        type="button"
-        className="btn btn-danger btn-sm"
-        onClick={() => deleteWord(word)}
-      >
-        Delete
-      </button>
-      <button
-        type="button"
-        className="btn btn-secondary btn-sm"
-        onClick={() => {
-          setIsEditing(true);
-        }}
-      >
-        Edit
-      </button>
-    </li>
+        <button
+          type="button"
+          className="btn btn-danger btn-sm"
+          onClick={() => deleteWord(word)}
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
   );
+  return row;
 }
 
 export default Word;

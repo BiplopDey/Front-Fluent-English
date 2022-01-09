@@ -1,5 +1,25 @@
 import React, { useState } from "react";
 
+function InputText(props) {
+  return (
+    <div className="input-group mb-3">
+      {/* <div className="input-group-prepend">
+        <span className="input-group-text" id="inputGroup-sizing-default">
+          {props.name}
+        </span>
+      </div> */}
+      <input
+        type="text"
+        className="form-control"
+        aria-label="Default"
+        aria-describedby="inputGroup-sizing-default"
+        value={props.state}
+        onChange={props.stateUpdate}
+      />
+    </div>
+  );
+}
+
 function WordForm({ word, operation, setDisplay }) {
   const [wordState, setWord] = useState({ ...word });
 
@@ -34,62 +54,42 @@ function WordForm({ word, operation, setDisplay }) {
   }
 
   return (
-    <div>
-      <div className="input-group mb-3">
-        <div className="input-group-prepend">
-          <span className="input-group-text" id="inputGroup-sizing-default">
-            Name
-          </span>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          aria-label="Default"
-          aria-describedby="inputGroup-sizing-default"
-          value={wordState.name}
-          onChange={updateChangeName}
+    <tr>
+      <th scope="row"></th>
+      <td>
+        <InputText
+          name="Name"
+          state={wordState.name}
+          stateUpdate={updateChangeName}
         />
-      </div>
-
-      <div className="input-group mb-3">
-        <div className="input-group-prepend">
-          <span className="input-group-text" id="inputGroup-sizing-default">
-            Transcription
-          </span>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          aria-label="Default"
-          aria-describedby="inputGroup-sizing-default"
-          value={wordState.transcription}
-          onChange={updateChangeTrans}
+      </td>
+      <td>
+        <InputText
+          name="Transcription"
+          state={wordState.transcription}
+          stateUpdate={updateChangeTrans}
         />
-      </div>
-
-      <div className="input-group mb-3">
-        <div className="input-group-prepend">
-          <span className="input-group-text" id="inputGroup-sizing-default">
-            Definition
-          </span>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          aria-label="Default"
-          aria-describedby="inputGroup-sizing-default"
-          value={wordState.definition}
-          onChange={updateChangeDef}
+      </td>
+      <td>
+        <InputText
+          name="Definition"
+          state={wordState.definition}
+          stateUpdate={updateChangeDef}
         />
-      </div>
-
-      <button type="button" className="btn btn-primary" onClick={addWord}>
-        Add
-      </button>
-      <button type="button" className="btn btn-primary" onClick={cancelEditing}>
-        Cancel
-      </button>
-    </div>
+      </td>
+      <td>
+        <button type="button" className="btn btn-primary" onClick={addWord}>
+          Add
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={cancelEditing}
+        >
+          Cancel
+        </button>
+      </td>
+    </tr>
   );
 }
 

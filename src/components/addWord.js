@@ -6,7 +6,22 @@ function AddWord({ name, add }) {
 
   if (isAdding) {
     const word = { name: name };
-    return <WordForm word={word} operation={add} setDisplay={setIsAdding} />;
+    return (
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col">Transcrip</th>
+            <th scope="col">Definition</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <WordForm word={word} operation={add} setDisplay={setIsAdding} />
+        </tbody>
+      </table>
+    );
   }
 
   return (
