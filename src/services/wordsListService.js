@@ -13,7 +13,10 @@ export const wordsListService = {
     const response = await diccionaryApiService.create(word);
     this.list = [response, ...this.list];
   },
-  delete(word) {
+
+  async delete(word) {
+    await diccionaryApiService.deleteById(word.id);
+
     this.list.splice(this.findIndexById(word.id), 1);
   },
   update(word) {

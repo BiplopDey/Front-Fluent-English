@@ -63,8 +63,7 @@ function Home() {
 
   function deleteWord(word) {
     setLoading(true);
-    diccionaryApiService.deleteById(word.id).then(() => {
-      db.delete(word);
+    db.delete(word).then(() => {
       updateDb();
       setLoading(false);
     });
