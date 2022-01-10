@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "http://localhost:3000/dicctionary";
+const url = "/http://localhost:3000/dicctionary";
 
 export const diccionaryApiService = {
   myUrl: url,
@@ -16,7 +16,6 @@ export const diccionaryApiService = {
   async deleteById(id) {
     try {
       await axios.delete(url + `/${id}`);
-      return id;
     } catch (err) {
       return err.response;
     }
