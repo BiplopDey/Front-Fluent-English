@@ -8,7 +8,6 @@ import axios from "axios";
 import Loader from "./loader";
 import ErrorMesaje from "./errorMessaje";
 import { WordListing } from "../services/wordListing";
-import { WordsList } from "../services/WordsList";
 
 function Home() {
   let [response, setResponse] = useState("");
@@ -16,7 +15,6 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [db, setDb] = useState([]);
-  const [w, setWords] = useState(new WordsList([]));
 
   useEffect(() => {
     getAll();
@@ -24,6 +22,7 @@ function Home() {
 
   useEffect(() => {
     setWordList([...WordListing.startsWith(db, response)]);
+    // console.log(response);
   }, [db, response]);
 
   function updateChange(event) {
@@ -54,6 +53,8 @@ function Home() {
     diccionaryApiService
       .fetchAll()
       .then((data) => {
+        console.log("getting data");
+        setWordList(data);
         setDb([...data]);
         setLoading(false);
       })
