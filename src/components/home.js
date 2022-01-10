@@ -4,15 +4,15 @@ import Search from "./search";
 import AddWord from "./addWord";
 import Words from "./words";
 import { diccionaryApiService } from "../services/diccionaryApiService";
-import { wordsList } from "../services/wordsList";
+import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "./errorMessaje";
 
 function Home() {
   let [response, setResponse] = useState("");
-  const [wordList, setWordList] = useState(wordsList);
+  const [wordList, setWordList] = useState(wordsListService);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [db, setDb] = useState(wordsList);
+  const [db, setDb] = useState(wordsListService);
 
   useEffect(() => {
     getAll();
@@ -47,17 +47,21 @@ function Home() {
 
   function getAll() {
     setLoading(true);
-    diccionaryApiService
-      .fetchAll()
-      .then((data) => {
-        db.addAll(data);
-        updateDb();
-        setLoading(false);
-      })
-      .catch((errorResponse) => {
-        setLoading(false);
-        setError(errorResponse);
-      });
+    db.fetchAll().then(() => {
+      updateDb();
+      setLoading(false);
+    });
+    // diccionaryApiService
+    //   .fetchAll()
+    //   .then((data) => {
+    //     db.addAll(data);
+    //     updateDb();
+    //     setLoading(false);
+    //   })
+    //   .catch((errorResponse) => {
+    //     setLoading(false);
+    //     setError(errorResponse);
+    //   });
   }
 
   function updateDb() {
