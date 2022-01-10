@@ -8,22 +8,22 @@ import axios from "axios";
 import Loader from "./loader";
 import ErrorMesaje from "./errorMessaje";
 import { WordListing } from "../services/wordListing";
-import { WordsList } from "../services/WordsList";
+import { wordsList } from "../services/wordsList";
 
 function Home() {
   let [response, setResponse] = useState("");
-  const [wordList, setWordList] = useState([]);
+  const [wordList, setWordList] = useState(wordsList);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [db, setDb] = useState([]);
-  const [w, setWords] = useState(new WordsList([]));
 
   useEffect(() => {
     getAll();
   }, []);
 
   useEffect(() => {
-    setWordList([...WordListing.startsWith(db, response)]);
+    wordList.addAll([...WordListing.startsWith(db, response)]);
+    setWordList({ ...wordList });
   }, [db, response]);
 
   function updateChange(event) {
@@ -83,7 +83,7 @@ function Home() {
       <AddWord name={response} add={addWord} />
       {error && <ErrorMesaje errorResponse={error} />}
       <Words
-        words={wordList}
+        words={wordList.list}
         loader={loading}
         deleteWord={deleteWord}
         updateWord={updateWord}
