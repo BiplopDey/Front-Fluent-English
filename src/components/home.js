@@ -38,8 +38,7 @@ function Home() {
 
   function addWord(word) {
     setLoading(true);
-    diccionaryApiService.create(word).then((data) => {
-      db.add(data);
+    db.add(word).then(() => {
       updateDb();
       setLoading(false);
     });
@@ -47,21 +46,15 @@ function Home() {
 
   function getAll() {
     setLoading(true);
-    db.fetchAll().then(() => {
-      updateDb();
-      setLoading(false);
-    });
-    // diccionaryApiService
-    //   .fetchAll()
-    //   .then((data) => {
-    //     db.addAll(data);
-    //     updateDb();
-    //     setLoading(false);
-    //   })
-    //   .catch((errorResponse) => {
-    //     setLoading(false);
-    //     setError(errorResponse);
-    //   });
+    db.fetchAll()
+      .then(() => {
+        updateDb();
+        setLoading(false);
+      })
+      .catch((errorResponse) => {
+        setLoading(false);
+        setError(errorResponse);
+      });
   }
 
   function updateDb() {
