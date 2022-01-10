@@ -5,13 +5,13 @@ export const wordsListService = {
   addAll(list) {
     this.list = [...list];
   },
-
   async fetchAll() {
     const words = await diccionaryApiService.fetchAll();
     this.addAll(words);
   },
-  add(word) {
-    this.list = [word, ...this.list];
+  async add(word) {
+    const response = await diccionaryApiService.create(word);
+    this.list = [response, ...this.list];
   },
   delete(word) {
     this.list.splice(this.findIndexById(word.id), 1);
