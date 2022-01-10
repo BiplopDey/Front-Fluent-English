@@ -13,14 +13,13 @@ export const wordsListService = {
     const response = await diccionaryApiService.create(word);
     this.list = [response, ...this.list];
   },
-
   async delete(word) {
     await diccionaryApiService.deleteById(word.id);
-
     this.list.splice(this.findIndexById(word.id), 1);
   },
-  update(word) {
-    this.list[this.findIndexById(word.id)] = word;
+  async update(word) {
+    const response = await diccionaryApiService.update(word);
+    this.list[this.findIndexById(word.id)] = response;
   },
   findIndexById(id) {
     return this.list.findIndex((word) => word.id == id);

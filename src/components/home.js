@@ -29,9 +29,8 @@ function Home() {
 
   function updateWord(word) {
     setLoading(true);
-    diccionaryApiService.update(word).then((data) => {
-      db.update(data);
-      updateDb();
+    db.update(word).then(() => {
+      setDb({ ...db });
       setLoading(false);
     });
   }
@@ -39,7 +38,15 @@ function Home() {
   function addWord(word) {
     setLoading(true);
     db.add(word).then(() => {
-      updateDb();
+      setDb({ ...db });
+      setLoading(false);
+    });
+  }
+
+  function deleteWord(word) {
+    setLoading(true);
+    db.delete(word).then(() => {
+      setDb({ ...db });
       setLoading(false);
     });
   }
@@ -48,25 +55,13 @@ function Home() {
     setLoading(true);
     db.fetchAll()
       .then(() => {
-        updateDb();
+        setDb({ ...db });
         setLoading(false);
       })
       .catch((errorResponse) => {
         setLoading(false);
         setError(errorResponse);
       });
-  }
-
-  function updateDb() {
-    setDb({ ...db });
-  }
-
-  function deleteWord(word) {
-    setLoading(true);
-    db.delete(word).then(() => {
-      updateDb();
-      setLoading(false);
-    });
   }
 
   return (
