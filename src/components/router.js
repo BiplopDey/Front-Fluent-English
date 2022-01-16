@@ -8,6 +8,7 @@ function Router() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </BrowserRouter>
   );
