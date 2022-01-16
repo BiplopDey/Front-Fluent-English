@@ -3,59 +3,52 @@ import Navbar from "./navbar";
 import Search from "./search";
 import AddWord from "./addWord";
 import Words from "./words";
-import { diccionaryApiService } from "../services/diccionaryApiService";
-import axios from "axios";
-import Loader from "./loader";
-import ErrorMesaje from "./errorMessaje";
-import { WordListing } from "../services/wordListing";
+import { wordsListService } from "../services/wordsListService";
+import ErrorMessaje from "./errorMessaje";
 
 function Home() {
   let [response, setResponse] = useState("");
-  const [wordList, setWordList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [db, setDb] = useState([]);
+  const [db, setDb] = useState(wordsListService);
 
   useEffect(() => {
     getAll();
   }, []);
 
-  useEffect(() => {
-    setWordList([...WordListing.startsWith(db, response)]);
-    // console.log(response);
-  }, [db, response]);
-
   function updateChange(event) {
-    //  response = event.target.value;
     setResponse(event.target.value);
   }
 
   function updateWord(word) {
     setLoading(true);
-    diccionaryApiService.update(word).then((data) => {
-      const index = findIndexById(db, word.id);
-      db[index] = data;
-      setDb([...db]);
+    db.update(word).then(() => {
+      setDb({ ...db });
       setLoading(false);
     });
   }
 
   function addWord(word) {
     setLoading(true);
-    diccionaryApiService.create(word).then((data) => {
-      setDb([data, ...db]);
+    db.add(word).then(() => {
+      setDb({ ...db });
+      setLoading(false);
+    });
+  }
+
+  function deleteWord(word) {
+    setLoading(true);
+    db.delete(word).then(() => {
+      setDb({ ...db });
       setLoading(false);
     });
   }
 
   function getAll() {
     setLoading(true);
-    diccionaryApiService
-      .fetchAll()
-      .then((data) => {
-        console.log("getting data");
-        setWordList(data);
-        setDb([...data]);
+    db.fetchAll()
+      .then(() => {
+        setDb({ ...db });
         setLoading(false);
       })
       .catch((errorResponse) => {
@@ -64,38 +57,19 @@ function Home() {
       });
   }
 
-  function deleteWord(word) {
-    const id = word.id;
-    setLoading(true);
-    diccionaryApiService.deleteById(id).then((id) => {
-      const index = findIndexById(db, id);
-      db.splice(index, 1);
-      setDb([...db]);
-      setLoading(false);
-    });
-  }
-
-  const findIndexById = (list, id) => list.findIndex((e) => e.id == id);
-
   return (
     <div>
       <Navbar />
       <Search response={response} onChange={updateChange} />
       <AddWord name={response} add={addWord} />
-      {error && <ErrorMesaje errorResponse={error} />}
+      {error && <ErrorMessaje errorResponse={error} />}
+
       <Words
-        words={wordList}
+        words={db.startsWith(response)}
         loader={loading}
         deleteWord={deleteWord}
         updateWord={updateWord}
       />
-      {/* <h1>DataBase</h1>
-      <Words
-        words={db}
-        loader={loading}
-        deleteWord={deleteWord}
-        updateWord={updateWord}
-      /> */}
     </div>
   );
 }

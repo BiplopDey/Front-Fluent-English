@@ -1,11 +1,11 @@
 import React from "react";
 
-function ErrorMesaje(props) {
+function ErrorMessaje(props) {
   return (
     <div className="alert alert-danger" role="alert">
-      {props.errorMessage.data}
+      {props.errorResponse.data}
     </div>
   );
 }
 
-export default ErrorMesaje;
+export default ErrorMessaje;

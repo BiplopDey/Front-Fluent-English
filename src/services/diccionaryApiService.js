@@ -16,7 +16,6 @@ export const diccionaryApiService = {
   async deleteById(id) {
     try {
       await axios.delete(url + `/${id}`);
-      return id;
     } catch (err) {
       return err.response;
     }
