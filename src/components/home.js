@@ -9,7 +9,6 @@ import ErrorMessaje from "./errorMessaje";
 
 function Home() {
   let [response, setResponse] = useState("");
-  const [wordList, setWordList] = useState(wordsListService);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [db, setDb] = useState(wordsListService);
@@ -17,11 +16,6 @@ function Home() {
   useEffect(() => {
     getAll();
   }, []);
-
-  useEffect(() => {
-    wordList.addAll([...db.startsWith(response)]);
-    setWordList({ ...wordList });
-  }, [db, response]);
 
   function updateChange(event) {
     setResponse(event.target.value);
@@ -72,7 +66,7 @@ function Home() {
       {error && <ErrorMessaje errorResponse={error} />}
 
       <Words
-        words={wordList.list}
+        words={db.startsWith(response)}
         loader={loading}
         deleteWord={deleteWord}
         updateWord={updateWord}
