@@ -3,7 +3,6 @@ import Navbar from "./navbar";
 import Search from "./search";
 import AddWord from "./addWord";
 import Words from "./words";
-import { diccionaryApiService } from "../services/diccionaryApiService";
 import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "./errorMessaje";
 

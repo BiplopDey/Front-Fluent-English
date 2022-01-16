@@ -1,7 +1,7 @@
 import axios from "axios";
 const url = "http://localhost:3000/dicctionary";
 
-export const diccionaryApiService = {
+export const diccionaryApiRepository = {
   myUrl: url,
 
   async create(word) {

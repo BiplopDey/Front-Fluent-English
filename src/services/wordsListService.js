@@ -1,8 +1,9 @@
-import { diccionaryApiService } from "./diccionaryApiService";
+import { diccionaryApiRepository } from "../repository/diccionaryApiRepository";
 
 export const wordsListService = {
   list: [],
-  queryRepository: diccionaryApiService,
+  queryRepository: diccionaryApiRepository,
+
   addAll(list) {
     this.list = [...list];
   },
