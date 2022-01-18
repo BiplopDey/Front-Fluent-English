@@ -57,6 +57,14 @@ function Home() {
       });
   }
 
+  function toggleStar(word) {
+    setLoading(true);
+    db.toggleStar(word).then(() => {
+      setDb({ ...db });
+      setLoading(false);
+    });
+  }
+
   return (
     <div>
       <Navbar />
@@ -67,6 +75,7 @@ function Home() {
       <Words
         words={db.startsWith(response)}
         loader={loading}
+        toggleStar={toggleStar}
         deleteWord={deleteWord}
         updateWord={updateWord}
       />

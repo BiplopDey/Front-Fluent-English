@@ -1,16 +1,22 @@
-import { diccionaryApiService } from "./diccionaryApiService";
+import { diccionaryApiRepository } from "../repository/diccionaryApiRepository";
 
 export const wordsListService = {
   list: [],
-  queryRepository: diccionaryApiService,
+  queryRepository: diccionaryApiRepository,
+
   addAll(list) {
     this.list = [...list];
+  },
+  async toggleStar(word) {
+    word.star = !word.star;
+    await this.update(word);
   },
   async fetchAll() {
     const words = await this.queryRepository.fetchAll();
     this.addAll(words);
   },
   async add(word) {
+    word.star = false;
     const response = await this.queryRepository.create(word);
     this.list = [response, ...this.list];
   },

@@ -1,7 +1,7 @@
 import Loader from "./loader";
 import Word from "./word";
 
-function Words({ words, loader, deleteWord, updateWord }) {
+function Words({ words, loader, deleteWord, updateWord, toggleStar }) {
   if (loader) return <Loader />;
 
   if (words.length === 0)
@@ -27,6 +27,7 @@ function Words({ words, loader, deleteWord, updateWord }) {
           <Word
             key={word.id}
             deleteWord={deleteWord}
+            toggleStar={toggleStar}
             word={word}
             updateWord={updateWord}
           />
