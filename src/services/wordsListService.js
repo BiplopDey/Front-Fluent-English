@@ -2,18 +2,28 @@ import { diccionaryApiRepository } from "../repository/diccionaryApiRepository";
 
 export const wordsListService = {
   list: [],
+  error: null,
   queryRepository: diccionaryApiRepository,
 
   addAll(list) {
     this.list = [...list];
+  },
+  async fetchFavorites() {
+    await this.fetchAll();
+
+    this.addAll(this.list.filter((e) => e.star == true));
   },
   async toggleStar(word) {
     word.star = !word.star;
     await this.update(word);
   },
   async fetchAll() {
-    const words = await this.queryRepository.fetchAll();
-    this.addAll(words);
+    try {
+      const words = await this.queryRepository.fetchAll();
+      this.addAll(words);
+    } catch (err) {
+      this.error = err;
+    }
   },
   async add(word) {
     word.star = false;

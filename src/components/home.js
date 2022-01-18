@@ -12,6 +12,22 @@ function Home() {
   const [loading, setLoading] = useState(false);
   const [db, setDb] = useState(wordsListService);
 
+  useEffect(() => {
+    getAll();
+  }, []);
+
+  function getAll() {
+    setLoading(true);
+    db.fetchAll()
+      .then(() => {
+        setDb({ ...db });
+        setLoading(false);
+      })
+      .catch((errorResponse) => {
+        setLoading(false);
+        setError(errorResponse);
+      });
+  }
   function updateChange(event) {
     setResponse(event.target.value);
   }
@@ -34,6 +50,7 @@ function Home() {
       <Words
         setError={setError}
         db={db}
+        wordsList={db.startsWith(response)}
         setDb={setDb}
         loading={loading}
         setLoading={setLoading}

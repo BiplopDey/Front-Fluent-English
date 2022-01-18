@@ -3,11 +3,7 @@ import Word from "./word";
 import React, { useEffect, useState } from "react";
 import { wordsListService } from "../services/wordsListService";
 
-function Words({ db, setDb, loading, setLoading, setError }) {
-  useEffect(() => {
-    getAll();
-  }, []);
-
+function Words({ db, setDb, wordsList, loading, setLoading, setError }) {
   function updateWord(word) {
     setLoading(true);
     db.update(word).then(() => {
@@ -22,19 +18,6 @@ function Words({ db, setDb, loading, setLoading, setError }) {
       setDb({ ...db });
       setLoading(false);
     });
-  }
-
-  function getAll() {
-    setLoading(true);
-    db.fetchAll()
-      .then(() => {
-        setDb({ ...db });
-        setLoading(false);
-      })
-      .catch((errorResponse) => {
-        setLoading(false);
-        setError(errorResponse);
-      });
   }
 
   function toggleStar(word) {
@@ -66,7 +49,7 @@ function Words({ db, setDb, loading, setLoading, setError }) {
         </tr>
       </thead>
       <tbody>
-        {db.list.map((word) => (
+        {wordsList.map((word) => (
           <Word
             key={word.id}
             deleteWord={deleteWord}
