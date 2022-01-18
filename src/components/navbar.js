@@ -13,7 +13,10 @@ function Navbar() {
               <Link to="/">Home</Link>
             </button>
             <button className="nav-link">
-              <Link to="/create">create</Link>
+              <Link to="/create">Create</Link>
+            </button>
+            <button className="nav-link">
+              <Link to="/favorites">Favorites</Link>
             </button>
           </div>
         </div>

@@ -6,8 +6,7 @@ class Favorites extends Component {
     return (
       <div>
         <Navbar />
-        Create
-        <input type="text"></input>
+        Fab
       </div>
     );
   }
