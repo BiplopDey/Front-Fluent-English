@@ -20,7 +20,7 @@ function SentenseForm({ word, operation, setDisplay }) {
     setDisplay(false);
   }
 
-  return (
+  const body = (
     <tr>
       <th scope="row"></th>
       <td>
@@ -44,6 +44,21 @@ function SentenseForm({ word, operation, setDisplay }) {
       </td>
     </tr>
   );
+
+  const table = (
+    <table className="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>{body}</tbody>
+    </table>
+  );
+
+  return table;
 }
 
 export default SentenseForm;
