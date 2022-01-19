@@ -11,7 +11,7 @@ function AddWord({ name, add }) {
     const form = (
       <WordForm word={word} operation={add} setDisplay={setIsAdding} />
     );
-    return (
+    const old = (
       <table className="table">
         <thead>
           <tr>
@@ -28,6 +28,7 @@ function AddWord({ name, add }) {
         </tbody>
       </table>
     );
+    return form;
   }
 
   return (
