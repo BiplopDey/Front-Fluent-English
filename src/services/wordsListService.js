@@ -25,11 +25,22 @@ export const wordsListService = {
       this.error = err;
     }
   },
+  async fetchWords() {
+    await this.fetchAll();
+    this.addAll(this.list.filter((e) => !e.isSentence)); //e.isWord || e.isPhrasalVerb));
+  },
+  async fetchPhrasalVerb() {
+    await this.fetchAll();
+    this.addAll(this.list.filter((e) => e.isPhrasalVerb)); //e.isWord || e.isPhrasalVerb));
+  },
+  async fetchSentence() {
+    await this.fetchAll();
+    this.addAll(this.list.filter((e) => e.isSentence));
+  },
+
   async add(word) {
     word.star = false;
     const name = word.name;
-    // //console.log(name);
-    // console.log(wordService.isWord(name));
     if (wordService.isWord(name)) {
       word.isWord = true;
     }
