@@ -41,6 +41,7 @@ export const wordsListService = {
   async add(word) {
     word.star = false;
     const name = word.name;
+    console.log(wordService.isPhrasalVerb(name));
     if (wordService.isWord(name)) {
       word.isWord = true;
     }

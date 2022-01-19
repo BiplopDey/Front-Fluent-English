@@ -5,7 +5,7 @@ import AddWord from "./addWord";
 import Words from "./words";
 import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "./errorMessaje";
-const radioButton = {
+const radioButtonNames = {
   words: "Words",
   phrasalVerb: "Phrasal verbs",
   sentense: "Sentense",
@@ -15,21 +15,23 @@ function Home() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [db, setDb] = useState(wordsListService);
-  const [currentFetching, setCurrentFetching] = useState(radioButton.words);
+  let [currentFetching, setCurrentFetching] = useState(radioButtonNames.words);
   useEffect(() => {
     getAll();
   }, [currentFetching]);
 
   function setFetch(event) {
-    setCurrentFetching(event.target.name);
+    currentFetching = event.target.name;
+    setCurrentFetching(currentFetching);
+    //console.log(event.target.name);
     console.log(currentFetching);
   }
 
   function fetch() {
-    if (currentFetching == radioButton.words) return db.fetchAll(); // returns a promise
-    if (currentFetching == radioButton.phrasalVerb)
+    if (currentFetching == radioButtonNames.words) return db.fetchWords(); // returns a promise
+    if (currentFetching == radioButtonNames.phrasalVerb)
       return db.fetchPhrasalVerb();
-    if (currentFetching == radioButton.sentense) return db.fetchSentence();
+    if (currentFetching == radioButtonNames.sentense) return db.fetchSentence();
   }
 
   function getAll() {
@@ -44,6 +46,7 @@ function Home() {
         setError(errorResponse);
       });
   }
+
   function updateChange(event) {
     setResponse(event.target.value);
   }
@@ -55,6 +58,34 @@ function Home() {
       setLoading(false);
     });
   }
+  const radioButtons = (
+    <div className="btn-group" role="group" aria-label="Basic outlined example">
+      <button
+        type="button"
+        name={radioButtonNames.words}
+        onClick={setFetch}
+        className="btn btn-outline-primary"
+      >
+        {radioButtonNames.words}
+      </button>
+      <button
+        type="button"
+        name={radioButtonNames.phrasalVerb}
+        onClick={setFetch}
+        className="btn btn-outline-primary"
+      >
+        {radioButtonNames.phrasalVerb}
+      </button>
+      <button
+        type="button"
+        name={radioButtonNames.sentense}
+        onClick={setFetch}
+        className="btn btn-outline-primary"
+      >
+        {radioButtonNames.sentense}
+      </button>
+    </div>
+  );
 
   return (
     <div>
@@ -62,36 +93,7 @@ function Home() {
       <Search response={response} onChange={updateChange} />
       <AddWord name={response} add={addWord} />
       {error && <ErrorMessaje errorResponse={error} />}
-      <div
-        className="btn-group"
-        role="group"
-        aria-label="Basic outlined example"
-      >
-        <button
-          type="button"
-          name={radioButton.words}
-          onClick={setFetch}
-          className="btn btn-outline-primary"
-        >
-          {radioButton.words}
-        </button>
-        <button
-          type="button"
-          name={radioButton.phrasalVerb}
-          onClick={setFetch}
-          className="btn btn-outline-primary"
-        >
-          {radioButton.phrasalVerb}
-        </button>
-        <button
-          type="button"
-          name={radioButton.sentense}
-          onClick={setFetch}
-          className="btn btn-outline-primary"
-        >
-          {radioButton.sentense}
-        </button>
-      </div>
+      {radioButtons}
       <Words
         setError={setError}
         db={db}
@@ -99,6 +101,7 @@ function Home() {
         setDb={setDb}
         loading={loading}
         setLoading={setLoading}
+        displaySentences={currentFetching == radioButtonNames.sentense}
       />
     </div>
   );

@@ -2,8 +2,17 @@ import Loader from "./loader";
 import Word from "./word";
 import React, { useEffect, useState } from "react";
 import { wordsListService } from "../services/wordsListService";
+import Sentece from "./sentence";
 
-function Words({ db, setDb, wordsList, loading, setLoading, setError }) {
+function Words({
+  db,
+  setDb,
+  wordsList,
+  loading,
+  setLoading,
+  setError,
+  displaySentences,
+}) {
   function updateWord(word) {
     setLoading(true);
     db.update(word).then(() => {
@@ -35,6 +44,30 @@ function Words({ db, setDb, wordsList, loading, setLoading, setError }) {
       <ul>
         <li>No data</li>
       </ul>
+    );
+
+  if (displaySentences)
+    return (
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {wordsList.map((word) => (
+            <Sentece
+              key={word.id}
+              deleteWord={deleteWord}
+              toggleStar={toggleStar}
+              word={word}
+              updateWord={updateWord}
+            />
+          ))}
+        </tbody>
+      </table>
     );
 
   return (
