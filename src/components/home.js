@@ -7,42 +7,14 @@ import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "./errorMessaje";
 
 function Home() {
-  let [response, setResponse] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [response, setResponse] = useState("");
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [db, setDb] = useState(wordsListService);
 
   useEffect(() => {
     getAll();
   }, []);
-
-  function updateChange(event) {
-    setResponse(event.target.value);
-  }
-
-  function updateWord(word) {
-    setLoading(true);
-    db.update(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
-  }
-
-  function addWord(word) {
-    setLoading(true);
-    db.add(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
-  }
-
-  function deleteWord(word) {
-    setLoading(true);
-    db.delete(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
-  }
 
   function getAll() {
     setLoading(true);
@@ -56,10 +28,13 @@ function Home() {
         setError(errorResponse);
       });
   }
+  function updateChange(event) {
+    setResponse(event.target.value);
+  }
 
-  function toggleStar(word) {
+  function addWord(word) {
     setLoading(true);
-    db.toggleStar(word).then(() => {
+    db.add(word).then(() => {
       setDb({ ...db });
       setLoading(false);
     });
@@ -73,11 +48,12 @@ function Home() {
       {error && <ErrorMessaje errorResponse={error} />}
 
       <Words
-        words={db.startsWith(response)}
-        loader={loading}
-        toggleStar={toggleStar}
-        deleteWord={deleteWord}
-        updateWord={updateWord}
+        setError={setError}
+        db={db}
+        wordsList={db.startsWith(response)}
+        setDb={setDb}
+        loading={loading}
+        setLoading={setLoading}
       />
     </div>
   );

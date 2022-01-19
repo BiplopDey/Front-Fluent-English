@@ -1,10 +1,36 @@
 import Loader from "./loader";
 import Word from "./word";
+import React, { useEffect, useState } from "react";
+import { wordsListService } from "../services/wordsListService";
 
-function Words({ words, loader, deleteWord, updateWord, toggleStar }) {
-  if (loader) return <Loader />;
+function Words({ db, setDb, wordsList, loading, setLoading, setError }) {
+  function updateWord(word) {
+    setLoading(true);
+    db.update(word).then(() => {
+      setDb({ ...db });
+      setLoading(false);
+    });
+  }
 
-  if (words.length === 0)
+  function deleteWord(word) {
+    setLoading(true);
+    db.delete(word).then(() => {
+      setDb({ ...db });
+      setLoading(false);
+    });
+  }
+
+  function toggleStar(word) {
+    setLoading(true);
+    db.toggleStar(word).then(() => {
+      setDb({ ...db });
+      setLoading(false);
+    });
+  }
+
+  if (loading) return <Loader />;
+
+  if (db.isEmpty())
     return (
       <ul>
         <li>No data</li>
@@ -23,7 +49,7 @@ function Words({ words, loader, deleteWord, updateWord, toggleStar }) {
         </tr>
       </thead>
       <tbody>
-        {words.map((word) => (
+        {wordsList.map((word) => (
           <Word
             key={word.id}
             deleteWord={deleteWord}

@@ -1,24 +1,5 @@
 import React, { useState } from "react";
-
-function InputText(props) {
-  return (
-    <div className="input-group mb-3">
-      {/* <div className="input-group-prepend">
-        <span className="input-group-text" id="inputGroup-sizing-default">
-          {props.name}
-        </span>
-      </div> */}
-      <input
-        type="text"
-        className="form-control"
-        aria-label="Default"
-        aria-describedby="inputGroup-sizing-default"
-        value={props.state}
-        onChange={props.stateUpdate}
-      />
-    </div>
-  );
-}
+import InputText from "./inputText";
 
 function WordForm({ word, operation, setDisplay }) {
   const [wordState, setWord] = useState({ ...word });

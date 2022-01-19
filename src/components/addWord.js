@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { wordService } from "../services/wordService";
 import WordForm from "./wordForm";
 
 function AddWord({ name, add }) {
@@ -6,6 +7,10 @@ function AddWord({ name, add }) {
 
   if (isAdding) {
     const word = { name: name };
+    //const form = wordService.isSentence(name) ? <WordForm word={word} operation={add} setDisplay={setIsAdding} />
+    const form = (
+      <WordForm word={word} operation={add} setDisplay={setIsAdding} />
+    );
     return (
       <table className="table">
         <thead>
@@ -18,7 +23,8 @@ function AddWord({ name, add }) {
           </tr>
         </thead>
         <tbody>
-          <WordForm word={word} operation={add} setDisplay={setIsAdding} />
+          {/* <WordForm word={word} operation={add} setDisplay={setIsAdding} /> */}
+          {form}
         </tbody>
       </table>
     );

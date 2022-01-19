@@ -20,7 +20,6 @@ export const diccionaryApiRepository = {
       return err.response;
     }
   },
-
   async fetchAll() {
     try {
       const response = await axios.get(url);

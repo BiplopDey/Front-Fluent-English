@@ -1,22 +1,44 @@
 import { diccionaryApiRepository } from "../repository/diccionaryApiRepository";
+import { wordService } from "./wordService";
 
 export const wordsListService = {
   list: [],
+  error: null,
   queryRepository: diccionaryApiRepository,
 
   addAll(list) {
     this.list = [...list];
+  },
+  async fetchFavorites() {
+    await this.fetchAll();
+    this.addAll(this.list.filter((e) => e.star == true));
   },
   async toggleStar(word) {
     word.star = !word.star;
     await this.update(word);
   },
   async fetchAll() {
-    const words = await this.queryRepository.fetchAll();
-    this.addAll(words);
+    try {
+      const words = await this.queryRepository.fetchAll();
+      this.addAll(words);
+    } catch (err) {
+      this.error = err;
+    }
   },
   async add(word) {
     word.star = false;
+    const name = word.name;
+    // //console.log(name);
+    // console.log(wordService.isWord(name));
+    if (wordService.isWord(name)) {
+      word.isWord = true;
+    }
+    if (wordService.isPhrasalVerb(name)) {
+      word.isPhrasalVerb = true;
+    }
+    if (wordService.isSentence(name)) {
+      word.isSentence = true;
+    }
     const response = await this.queryRepository.create(word);
     this.list = [response, ...this.list];
   },
