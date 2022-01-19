@@ -5,6 +5,8 @@ import AddWord from "./addWord";
 import Words from "./words";
 import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "./errorMessaje";
+import SentenceList from "./sentenceList";
+import WordList from "./wordList";
 const radioButtonNames = {
   words: "Words",
   phrasalVerb: "Phrasal verbs",
@@ -86,7 +88,26 @@ function Home() {
       </button>
     </div>
   );
-
+  const list =
+    currentFetching == radioButtonNames.sentense ? (
+      <SentenceList
+        setError={setError}
+        db={db}
+        wordsList={db.startsWith(response)}
+        setDb={setDb}
+        loading={loading}
+        setLoading={setLoading}
+      />
+    ) : (
+      <WordList
+        setError={setError}
+        db={db}
+        wordsList={db.startsWith(response)}
+        setDb={setDb}
+        loading={loading}
+        setLoading={setLoading}
+      />
+    );
   return (
     <div>
       <Navbar />
@@ -94,7 +115,7 @@ function Home() {
       <AddWord name={response} add={addWord} />
       {error && <ErrorMessaje errorResponse={error} />}
       {radioButtons}
-      <Words
+      {/* <Words
         setError={setError}
         db={db}
         wordsList={db.startsWith(response)}
@@ -102,7 +123,8 @@ function Home() {
         loading={loading}
         setLoading={setLoading}
         displaySentences={currentFetching == radioButtonNames.sentense}
-      />
+      /> */}
+      {list}
     </div>
   );
 }
