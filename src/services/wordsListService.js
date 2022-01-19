@@ -1,4 +1,5 @@
 import { diccionaryApiRepository } from "../repository/diccionaryApiRepository";
+import { wordService } from "./wordService";
 
 export const wordsListService = {
   list: [],
@@ -10,7 +11,6 @@ export const wordsListService = {
   },
   async fetchFavorites() {
     await this.fetchAll();
-
     this.addAll(this.list.filter((e) => e.star == true));
   },
   async toggleStar(word) {
@@ -27,6 +27,18 @@ export const wordsListService = {
   },
   async add(word) {
     word.star = false;
+    const name = word.name;
+    // //console.log(name);
+    // console.log(wordService.isWord(name));
+    if (wordService.isWord(name)) {
+      word.isWord = true;
+    }
+    if (wordService.isPhrasalVerb(name)) {
+      word.isPhrasalVerb = true;
+    }
+    if (wordService.isSentence(name)) {
+      word.isSentence = true;
+    }
     const response = await this.queryRepository.create(word);
     this.list = [response, ...this.list];
   },

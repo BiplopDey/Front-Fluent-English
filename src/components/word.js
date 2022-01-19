@@ -18,7 +18,7 @@ function Word({ word, updateWord, deleteWord, toggleStar }) {
       <td>{word.definition}</td>
       <td>
         <i
-          class={word.star ? "bi bi-star-fill" : "bi bi-star"}
+          className={word.star ? "bi bi-star-fill" : "bi bi-star"}
           onClick={() => toggleStar(word)}
         ></i>
         <button
