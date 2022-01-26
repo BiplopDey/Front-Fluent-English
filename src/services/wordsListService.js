@@ -1,5 +1,6 @@
 import { restApiRepository } from "../repository/restApiRepository";
 import { urlList } from "../repository/urlList";
+import { listCrud } from "./listCrud";
 import { wordService } from "./wordService";
 
 export const wordsListService = {
@@ -64,20 +65,16 @@ export const wordsListService = {
 
   async delete(word) {
     await this.dicctionaryRepository.deleteById(word.id);
-    this.list.splice(this.findIndexById(word.id), 1);
+    listCrud.delete(this.list, word);
   },
 
   async update(word) {
     const response = await this.dicctionaryRepository.update(word);
-    this.list[this.findIndexById(word.id)] = response;
-  },
-
-  findIndexById(id) {
-    return this.list.findIndex((word) => word.id == id);
+    listCrud.update(this.list, response);
   },
 
   isEmpty() {
-    return this.list.length === 0;
+    return listCrud.empty(this.list);
   },
 
   startsWith(str) {
