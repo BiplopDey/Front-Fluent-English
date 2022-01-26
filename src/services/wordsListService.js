@@ -6,9 +6,7 @@ import { wordService } from "./wordService";
 export const wordsListService = {
   list: [],
   error: null,
-  dicctionaryRepository: {
-    ...restApiRepository.setUrl("http://localhost:3000/dicctionary"),
-  },
+  dicctionaryRepository: new restApiRepository(urlList.dicctionary),
 
   addAll(list) {
     this.list = [...list];
@@ -79,7 +77,7 @@ export const wordsListService = {
   },
 
   startsWith(str) {
-    console.log(this.list);
+    //console.log(this.list);
     return str.length === 0
       ? this.list
       : this.list.filter((word) => word.name.startsWith(str));

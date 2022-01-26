@@ -42,7 +42,7 @@ function Home() {
     fetch()
       .then(() => {
         setDb({ ...db });
-        console.log(wordsListService.dicctionaryRepository.url);
+        //console.log(wordsListService.dicctionaryRepository.url);
         setLoading(false);
       })
       .catch((errorResponse) => {

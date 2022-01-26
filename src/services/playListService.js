@@ -6,9 +6,7 @@ export const playListService = {
   list: [],
   currentIndex: -1,
   error: null,
-  playListRepository: {
-    ...restApiRepository.setUrl("http://localhost:3000/videos"),
-  },
+  playListRepository: new restApiRepository(urlList.videos),
 
   addAll(list) {
     this.list = [...list];

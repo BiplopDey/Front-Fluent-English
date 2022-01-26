@@ -18,6 +18,7 @@ export default function VideoPlayer({ videoUrl }) {
       setDb({ ...db });
       if (videoUrl.length === 0) setCurrentVideo(db.nextVideo());
       setLoading(false);
+      //  console.log(playListService.playListRepository.url);
     });
   }
 
