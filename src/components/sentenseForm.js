@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InputText from "./inputText";
 
-function WordForm({ word, operation, setDisplay }) {
+function SentenseForm({ word, operation, setDisplay }) {
   const [wordState, setWord] = useState({ ...word });
 
   function addWord() {
@@ -13,20 +13,6 @@ function WordForm({ word, operation, setDisplay }) {
     setWord({
       ...wordState,
       name: event.target.value,
-    });
-  }
-
-  function updateChangeTrans(event) {
-    setWord({
-      ...wordState,
-      transcription: event.target.value,
-    });
-  }
-
-  function updateChangeDef(event) {
-    setWord({
-      ...wordState,
-      definition: event.target.value,
     });
   }
 
@@ -42,20 +28,6 @@ function WordForm({ word, operation, setDisplay }) {
           name="Name"
           state={wordState.name}
           stateUpdate={updateChangeName}
-        />
-      </td>
-      <td>
-        <InputText
-          name="Transcription"
-          state={wordState.transcription}
-          stateUpdate={updateChangeTrans}
-        />
-      </td>
-      <td>
-        <InputText
-          name="Definition"
-          state={wordState.definition}
-          stateUpdate={updateChangeDef}
         />
       </td>
       <td>
@@ -79,15 +51,14 @@ function WordForm({ word, operation, setDisplay }) {
         <tr>
           <th scope="col"></th>
           <th scope="col">Name</th>
-          <th scope="col">Transcrip</th>
-          <th scope="col">Definition</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>{body}</tbody>
     </table>
   );
+
   return table;
 }
 
-export default WordForm;
+export default SentenseForm;

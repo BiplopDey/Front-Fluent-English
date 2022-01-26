@@ -4,15 +4,7 @@ import React, { useEffect, useState } from "react";
 import { wordsListService } from "../services/wordsListService";
 import Sentece from "./sentence";
 
-function Words({
-  db,
-  setDb,
-  wordsList,
-  loading,
-  setLoading,
-  setError,
-  displaySentences,
-}) {
+function SentenceList({ db, setDb, wordsList, loading, setLoading }) {
   function updateWord(word) {
     setLoading(true);
     db.update(word).then(() => {
@@ -46,44 +38,18 @@ function Words({
       </ul>
     );
 
-  if (displaySentences)
-    return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col"></th>
-            <th scope="col">Name</th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {wordsList.map((word) => (
-            <Sentece
-              key={word.id}
-              deleteWord={deleteWord}
-              toggleStar={toggleStar}
-              word={word}
-              updateWord={updateWord}
-            />
-          ))}
-        </tbody>
-      </table>
-    );
-
   return (
-    <table className="table table-hover">
+    <table className="table">
       <thead>
         <tr>
-          <th scope="col">#</th>
-          <th scope="col">Word</th>
-          <th scope="col">Transcrition</th>
-          <th scope="col">Definition</th>
+          <th scope="col"></th>
+          <th scope="col">Name</th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         {wordsList.map((word) => (
-          <Word
+          <Sentece
             key={word.id}
             deleteWord={deleteWord}
             toggleStar={toggleStar}
@@ -96,4 +62,4 @@ function Words({
   );
 }
 
-export default Words;
+export default SentenceList;

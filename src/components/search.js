@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-function Search(props) {
+export default function Search(props) {
   return (
     <div className="input-group mb-3">
       <input
@@ -21,5 +21,3 @@ function Search(props) {
     </div>
   );
 }
-
-export default Search;
