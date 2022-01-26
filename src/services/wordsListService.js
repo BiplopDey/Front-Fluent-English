@@ -6,7 +6,9 @@ import { wordService } from "./wordService";
 export const wordsListService = {
   list: [],
   error: null,
-  dicctionaryRepository: restApiRepository.setUrl(urlList.dicctionary),
+  dicctionaryRepository: {
+    ...restApiRepository.setUrl("http://localhost:3000/dicctionary"),
+  },
 
   addAll(list) {
     this.list = [...list];
@@ -49,7 +51,6 @@ export const wordsListService = {
   async add(word) {
     word.star = false;
     const name = word.name;
-    console.log(wordService.isPhrasalVerb(name));
     if (wordService.isWord(name)) {
       word.isWord = true;
     }
@@ -78,6 +79,9 @@ export const wordsListService = {
   },
 
   startsWith(str) {
-    return this.list.filter((word) => word.name.startsWith(str));
+    console.log(this.list);
+    return str.length === 0
+      ? this.list
+      : this.list.filter((word) => word.name.startsWith(str));
   },
 };

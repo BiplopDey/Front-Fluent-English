@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "./navbar";
 import Search from "./search";
 import AddWord from "./addWord";
-import Words from "./words";
 import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "./errorMessaje";
 import SentenceList from "./sentenceList";
@@ -29,8 +28,6 @@ function Home() {
   function setFetch(event) {
     currentFetching = event.target.name;
     setCurrentFetching(currentFetching);
-    //console.log(event.target.name);
-    console.log(currentFetching);
   }
 
   function fetch() {
@@ -45,6 +42,7 @@ function Home() {
     fetch()
       .then(() => {
         setDb({ ...db });
+        console.log(wordsListService.dicctionaryRepository.url);
         setLoading(false);
       })
       .catch((errorResponse) => {
@@ -64,6 +62,7 @@ function Home() {
       setLoading(false);
     });
   }
+
   const radioButtons = (
     <div className="btn-group" role="group" aria-label="Basic outlined example">
       <button
@@ -92,6 +91,7 @@ function Home() {
       </button>
     </div>
   );
+
   const list =
     currentFetching == radioButtonNames.sentense ? (
       <SentenceList

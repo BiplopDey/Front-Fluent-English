@@ -6,34 +6,30 @@ export const playListService = {
   list: [],
   currentIndex: -1,
   error: null,
-  playListRepository: restApiRepository.setUrl(urlList.playList),
+  playListRepository: {
+    ...restApiRepository.setUrl("http://localhost:3000/videos"),
+  },
 
   addAll(list) {
     this.list = [...list];
   },
 
   getVideoUrlId(index) {
-    //    const videoId = this.list[this.currentIndex].videoId;
-    // console.log(this.list);
     return this.list[index].videoId;
   },
 
   mod_listLength(number) {
     const listLength = this.list.length;
-    console.log(listLength);
     return ((number % listLength) + listLength) % listLength;
   },
 
   nextVideo() {
-    console.log(this.currentIndex);
     this.currentIndex = this.mod_listLength(this.currentIndex + 1);
-    console.log(this.currentIndex);
     return this.getVideoUrlId(this.currentIndex);
   },
 
   prevVideo() {
     this.currentIndex = this.mod_listLength(this.currentIndex - 1);
-    console.log(this.currentIndex);
     return this.getVideoUrlId(this.currentIndex);
   },
 
