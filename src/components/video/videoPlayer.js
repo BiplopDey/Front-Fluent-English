@@ -4,14 +4,18 @@ import Video from "./video";
 export default function VideoPlayer({ playList, currentPlaying }) {
   const index = 0;
   const playListLength = playList.length;
-  const [currentIndex, setCurrentIndex] = useState(index);
+  let [currentIndex, setCurrentIndex] = useState(index);
 
   function next() {
-    currentIndex = (currentIndex + 1) % playListLength;
+    currentIndex = mod(currentIndex + 1);
     setCurrentIndex(currentIndex);
   }
+
+  const mod = (number) =>
+    ((number % playListLength) + playListLength) % playListLength;
+
   function prev() {
-    currentIndex = (currentIndex - 1) % playListLength;
+    currentIndex = mod(currentIndex - 1);
     setCurrentIndex(currentIndex);
   }
 
@@ -21,16 +25,16 @@ export default function VideoPlayer({ playList, currentPlaying }) {
       <button
         className="btn btn-outline-secondary"
         type="button"
-        onClick={next}
+        onClick={prev}
       >
-        Next
+        Prev
       </button>
       <button
         className="btn btn-outline-secondary"
         type="button"
-        onClick={prev}
+        onClick={next}
       >
-        Prev
+        Next
       </button>
     </>
   );

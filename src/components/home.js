@@ -8,17 +8,24 @@ import ErrorMessaje from "./errorMessaje";
 import SentenceList from "./sentenceList";
 import WordList from "./wordList";
 import Video from "./video/video";
+import VideoPlayer from "./video/videoPlayer";
+
 const radioButtonNames = {
   words: "Words",
   phrasalVerb: "Phrasal verbs",
   sentense: "Sentense",
 };
+
+const playList = ["2Qv0I76zZcE", "O6P86uwfdR0", "t2ypzz6gJm0", "5LrDIWkK_Bc"];
+
 function Home() {
   const [response, setResponse] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [db, setDb] = useState(wordsListService);
+
   let [currentFetching, setCurrentFetching] = useState(radioButtonNames.words);
+
   useEffect(() => {
     getAll();
   }, [currentFetching]);
@@ -113,7 +120,8 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <Video embedId="rokGy0huYEA" />
+      {/* <Video embedId={playList[1]} /> */}
+      <VideoPlayer playList={playList} currentPlaying={playList[0]} />
       <Search response={response} onChange={updateChange} />
       <AddWord name={response} add={addWord} />
       {error && <ErrorMessaje errorResponse={error} />}
