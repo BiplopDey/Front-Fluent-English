@@ -16,7 +16,7 @@ const radioButtonNames = {
   sentense: "Sentense",
 };
 
-const playList = ["2Qv0I76zZcE", "O6P86uwfdR0", "t2ypzz6gJm0", "5LrDIWkK_Bc"];
+const playList = ["O6P86uwfdR0", "t2ypzz6gJm0", "5LrDIWkK_Bc"];
 
 function Home() {
   const [response, setResponse] = useState("");
