@@ -7,6 +7,7 @@ import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "./errorMessaje";
 import SentenceList from "./sentenceList";
 import WordList from "./wordList";
+import Video from "./video/video";
 const radioButtonNames = {
   words: "Words",
   phrasalVerb: "Phrasal verbs",
@@ -108,22 +109,15 @@ function Home() {
         setLoading={setLoading}
       />
     );
+
   return (
     <div>
       <Navbar />
+      <Video embedId="rokGy0huYEA" />
       <Search response={response} onChange={updateChange} />
       <AddWord name={response} add={addWord} />
       {error && <ErrorMessaje errorResponse={error} />}
       {radioButtons}
-      {/* <Words
-        setError={setError}
-        db={db}
-        wordsList={db.startsWith(response)}
-        setDb={setDb}
-        loading={loading}
-        setLoading={setLoading}
-        displaySentences={currentFetching == radioButtonNames.sentense}
-      /> */}
       {list}
     </div>
   );

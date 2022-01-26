@@ -1,6 +1,6 @@
 import React from "react";
 
-function Loader() {
+export default function Loader() {
   return (
     <div className="lds-ring">
       <div></div>
@@ -11,4 +11,3 @@ function Loader() {
   );
 }
 
-export default Loader;
