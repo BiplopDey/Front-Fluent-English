@@ -23,6 +23,7 @@ export const playListService = {
 
   nextVideo() {
     this.currentIndex = this.mod_listLength(this.currentIndex + 1);
+    //console.log(this.currentIndex);
     return this.getVideoUrlId(this.currentIndex);
   },
 

@@ -4,7 +4,7 @@ import Loader from "../loader";
 import Video from "./video";
 
 export default function VideoPlayer({ videoUrl }) {
-  const [db, setDb] = useState(playListService);
+  let [db, setDb] = useState(playListService);
   let [loading, setLoading] = useState(false);
   let [currentVideo, setCurrentVideo] = useState(videoUrl);
 
@@ -15,10 +15,10 @@ export default function VideoPlayer({ videoUrl }) {
   function getAll() {
     setLoading(true);
     db.fetchAll().then(() => {
-      setDb({ ...db });
+      db = { ...db };
+      setDb(db);
       if (videoUrl.length === 0) setCurrentVideo(db.nextVideo());
       setLoading(false);
-      //  console.log(playListService.playListRepository.url);
     });
   }
 
