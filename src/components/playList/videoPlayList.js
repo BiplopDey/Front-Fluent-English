@@ -27,8 +27,15 @@ export default function VideoPlayList() {
         setError(errorResponse);
       });
   }
+
   function deleteVideo(video) {
     db.delete(video).then(() => {
+      setDb({ ...db });
+    });
+  }
+
+  function addVideo(video) {
+    db.add(video).then(() => {
       setDb({ ...db });
     });
   }
@@ -37,6 +44,15 @@ export default function VideoPlayList() {
     <>
       <Navbar />
       <Search response={response} setResponse={setResponse} />
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => {
+          addVideo({ url: response });
+        }}
+      >
+        Add
+      </button>
       {error && <ErrorMessaje errorResponse={error} />}
       <ul className="list-group">
         {db.list.map((video) => (
