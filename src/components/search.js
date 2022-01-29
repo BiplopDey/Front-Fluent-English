@@ -1,6 +1,8 @@
-import { Component } from "react";
+export default function Search({ response, setResponse }) {
+  function updateChange(event) {
+    setResponse(event.target.value);
+  }
 
-export default function Search(props) {
   return (
     <div className="input-group mb-3">
       <input
@@ -8,8 +10,8 @@ export default function Search(props) {
         className="form-control"
         placeholder="Search"
         autoFocus={true}
-        value={props.response}
-        onChange={props.onChange}
+        value={response}
+        onChange={updateChange}
         aria-label="Search"
         aria-describedby="search-word"
       />

@@ -42,17 +42,12 @@ function Home() {
     fetch()
       .then(() => {
         setDb({ ...db });
-        //console.log(wordsListService.dicctionaryRepository.url);
         setLoading(false);
       })
       .catch((errorResponse) => {
         setLoading(false);
         setError(errorResponse);
       });
-  }
-
-  function updateChange(event) {
-    setResponse(event.target.value);
   }
 
   function addWord(word) {
@@ -117,7 +112,7 @@ function Home() {
     <div>
       <Navbar />
       <VideoPlayer videoUrl="" />
-      <Search response={response} onChange={updateChange} />
+      <Search response={response} setResponse={setResponse} />
       <AddWord name={response} add={addWord} />
       {error && <ErrorMessaje errorResponse={error} />}
       {radioButtons}

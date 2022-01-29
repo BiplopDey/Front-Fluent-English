@@ -13,7 +13,7 @@ export const playListService = {
   },
 
   getVideoUrlId(index) {
-    return this.list[index].videoId;
+    return this.list[index].url;
   },
 
   mod_listLength(number) {
@@ -23,7 +23,6 @@ export const playListService = {
 
   nextVideo() {
     this.currentIndex = this.mod_listLength(this.currentIndex + 1);
-    //console.log(this.currentIndex);
     return this.getVideoUrlId(this.currentIndex);
   },
 
