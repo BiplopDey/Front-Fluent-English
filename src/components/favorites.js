@@ -7,48 +7,49 @@ import AddWord from "./addWord";
 import Words from "./words";
 import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "./errorMessaje";
+import WordList from "./wordList";
+import SentenceList from "./sentenceList";
 
 function Favorites() {
   const [response, setResponse] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [db, setDb] = useState(wordsListService);
-
-  function updateChange(event) {
-    setResponse(event.target.value);
-  }
+  const [dbWord, setDbWord] = useState(wordsListService);
+  const [dbSentence, setDbSentence] = useState(wordsListService);
 
   useEffect(() => {
-    getFavorites();
+    getFavorites(dbWord.fetchFavoritesWords());
+    getFavorites(dbSentence.fetchFavoritesSentences());
   }, []);
 
-  function getFavorites() {
+  function getFavorites(promise) {
     setLoading(true);
-    db.fetchFavorites()
-      .then(() => {
-        setDb({ ...db });
-        setLoading(false);
-      })
-      .catch((errorResponse) => {
-        setLoading(false);
-        setError(errorResponse);
-      });
+    promise.then(() => {
+      setDbWord({ ...dbWord });
+      setLoading(false);
+    });
   }
 
   return (
     <div>
       <Navbar />
-      <Search response={response} onChange={updateChange} />
+      <Search response={response} setResponse={setResponse} />
       {error && <ErrorMessaje errorResponse={error} />}
-
-      <Words
-        setError={setError}
-        db={db}
-        setDb={setDb}
-        wordsList={db}
+      <h2>Words</h2>
+      <WordList
+        db={dbWord}
+        setDb={setDbWord}
         loading={loading}
-        wordsList={db.startsWith(response)}
         setLoading={setLoading}
+        wordsList={dbWord.list}
+      />
+      <h2>Sentences</h2>
+      <SentenceList
+        db={dbSentence}
+        setDb={setDbSentence}
+        loading={loading}
+        setLoading={setLoading}
+        wordsList={dbSentence.list}
       />
     </div>
   );

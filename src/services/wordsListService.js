@@ -12,11 +12,18 @@ export const wordsListService = {
     this.list = [...list];
   },
 
-  async fetchFavorites() {
-    await this.fetchAll();
+  getFavorites() {
     this.addAll(this.list.filter((e) => e.star == true));
   },
 
+  async fetchFavoritesWords() {
+    await this.fetchWords();
+    this.getFavorites();
+  },
+  async fetchFavoritesSentences() {
+    await this.fetchSentence();
+    this.getFavorites();
+  },
   async toggleStar(word) {
     word.star = !word.star;
     await this.update(word);
