@@ -7,6 +7,7 @@ export default function VideoPlayer({ videoUrl }) {
   let [db, setDb] = useState(playListService);
   let [loading, setLoading] = useState(false);
   let [currentVideo, setCurrentVideo] = useState(videoUrl);
+  const [collapse, setCollapse] = useState(false);
 
   useEffect(() => {
     getAll();
@@ -26,7 +27,7 @@ export default function VideoPlayer({ videoUrl }) {
 
   return (
     <>
-      <Video embedId={currentVideo} />
+      <Video embedId={currentVideo} hide={collapse} />
       <button
         className="btn btn-outline-secondary"
         type="button"
@@ -40,6 +41,15 @@ export default function VideoPlayer({ videoUrl }) {
         onClick={() => setCurrentVideo(db.nextVideo())}
       >
         Next
+      </button>
+      <button
+        className="btn btn-outline-secondary"
+        type="button"
+        onClick={() => {
+          setCollapse(!collapse);
+        }}
+      >
+        {collapse ? "UnCollapse" : "Collapse"}
       </button>
     </>
   );
