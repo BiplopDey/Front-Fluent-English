@@ -26,6 +26,7 @@ function Favorites() {
     setLoading(true);
     promise.then(() => {
       setDbWord({ ...dbWord });
+      setDbSentence({ ...dbSentence });
       setLoading(false);
     });
   }

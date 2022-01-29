@@ -22,6 +22,7 @@ function AddWord({ name, add }) {
       </div>
     );
   }
+
   const word = { name: name };
 
   return wordService.isSentence(name) ? (

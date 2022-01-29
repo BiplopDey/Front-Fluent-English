@@ -20,10 +20,12 @@ export const wordsListService = {
     await this.fetchWords();
     this.getFavorites();
   },
+
   async fetchFavoritesSentences() {
     await this.fetchSentence();
     this.getFavorites();
   },
+
   async toggleStar(word) {
     word.star = !word.star;
     await this.update(word);

@@ -1,6 +1,6 @@
 export const listCrud = {
   delete(list, item) {
-    list.splice(this.findIndexById(item.id), 1);
+    list.splice(this.findIndexById(list, item.id), 1);
   },
 
   update(list, item) {
