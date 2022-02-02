@@ -16,8 +16,14 @@ export default function Search({ response, setResponse }) {
         aria-describedby="search-word"
       />
       <div className="input-group-append">
-        <button className="btn btn-outline-secondary" type="button">
-          Search
+        <button
+          className="btn btn-outline-secondary"
+          type="button"
+          onClick={() => {
+            setResponse("");
+          }}
+        >
+          X
         </button>
       </div>
     </div>

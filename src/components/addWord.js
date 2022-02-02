@@ -3,13 +3,13 @@ import { wordService } from "../services/wordService";
 import SentenseForm from "./sentenseForm";
 import WordForm from "./wordForm";
 
-function AddWord({ name, add }) {
+export default function AddWord({ name, add }) {
   const [isAdding, setIsAdding] = useState(false);
 
   if (!isAdding) {
     return (
       <div>
-        <h1>{name}</h1>
+        <h1>No words found, do you want to add {name}?</h1>
         <button
           type="button"
           className="btn btn-primary"
@@ -31,5 +31,3 @@ function AddWord({ name, add }) {
     <WordForm word={word} operation={add} setDisplay={setIsAdding} />
   );
 }
-
-export default AddWord;

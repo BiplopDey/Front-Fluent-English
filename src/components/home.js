@@ -7,6 +7,7 @@ import ErrorMessaje from "./errorMessaje";
 import SentenceList from "./sentenceList";
 import WordList from "./wordList";
 import VideoPlayer from "./video/videoPlayer";
+import { listCrud } from "../services/listCrud";
 
 const radioButtonNames = {
   words: "Words",
@@ -86,13 +87,14 @@ function Home() {
       </button>
     </div>
   );
+  const matchedWords = db.startsWith(response);
 
   const list =
     currentFetching == radioButtonNames.sentense ? (
       <SentenceList
         setError={setError}
         db={db}
-        wordsList={db.startsWith(response)}
+        wordsList={matchedWords}
         setDb={setDb}
         loading={loading}
         setLoading={setLoading}
@@ -101,7 +103,7 @@ function Home() {
       <WordList
         setError={setError}
         db={db}
-        wordsList={db.startsWith(response)}
+        wordsList={matchedWords}
         setDb={setDb}
         loading={loading}
         setLoading={setLoading}
@@ -111,9 +113,11 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <VideoPlayer videoUrl="" />
+      {/* <VideoPlayer videoUrl="" /> */}
       <Search response={response} setResponse={setResponse} />
-      <AddWord name={response} add={addWord} />
+      {listCrud.empty(matchedWords) && (
+        <AddWord name={response} add={addWord} />
+      )}
       {error && <ErrorMessaje errorResponse={error} />}
       {radioButtons}
       {list}
