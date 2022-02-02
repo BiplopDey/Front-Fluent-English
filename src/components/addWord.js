@@ -6,7 +6,7 @@ import WordForm from "./wordForm";
 export default function AddWord({ name, add }) {
   const [isAdding, setIsAdding] = useState(false);
 
-  if (!isAdding) {
+  if (!isAdding)
     return (
       <div>
         <h1>No words found, do you want to add {name}?</h1>
@@ -21,7 +21,6 @@ export default function AddWord({ name, add }) {
         </button>
       </div>
     );
-  }
 
   const word = { name: name };
 

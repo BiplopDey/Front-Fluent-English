@@ -3,10 +3,9 @@ import { playListService } from "../../services/playListService";
 import Loader from "../loader";
 import Video from "./video";
 
-export default function VideoPlayer({ videoUrl }) {
+export default function VideoPlayer({ currentVideo, setCurrentVideo }) {
   let [db, setDb] = useState(playListService);
   let [loading, setLoading] = useState(false);
-  let [currentVideo, setCurrentVideo] = useState(videoUrl);
   const [collapse, setCollapse] = useState(false);
 
   useEffect(() => {
@@ -18,7 +17,7 @@ export default function VideoPlayer({ videoUrl }) {
     db.fetchAll().then(() => {
       db = { ...db };
       setDb(db);
-      if (videoUrl.length === 0) setCurrentVideo(db.nextVideo());
+      if (currentVideo.length === 0) setCurrentVideo(db.nextVideo());
       setLoading(false);
     });
   }

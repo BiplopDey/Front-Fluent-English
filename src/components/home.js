@@ -8,6 +8,7 @@ import SentenceList from "./sentenceList";
 import WordList from "./wordList";
 import VideoPlayer from "./video/videoPlayer";
 import { listCrud } from "../services/listCrud";
+import { wordService } from "../services/wordService";
 
 const radioButtonNames = {
   words: "Words",
@@ -15,12 +16,13 @@ const radioButtonNames = {
   sentense: "Sentense",
 };
 
-function Home() {
+export default function Home() {
   const [response, setResponse] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [db, setDb] = useState(wordsListService);
   let [currentFetching, setCurrentFetching] = useState(radioButtonNames.words);
+  const [currentVideo, setCurrentVideo] = useState("");
 
   useEffect(() => {
     getAll();
@@ -111,18 +113,37 @@ function Home() {
     );
 
   return (
-    <div>
+    <>
       <Navbar />
-      {/* <VideoPlayer videoUrl="" /> */}
+      <VideoPlayer
+        currentVideo={currentVideo}
+        setCurrentVideo={setCurrentVideo}
+      />
       <Search response={response} setResponse={setResponse} />
-      {listCrud.empty(matchedWords) && (
+      {error && <ErrorMessaje errorResponse={error} />}
+      {wordService.isYoutubeUrl(response) && (
+        <>
+          <h1>Wach video</h1>
+          <button
+            onClick={() => {
+              setCurrentVideo(wordService.getYoutubeVideoId(response));
+              console.log(wordService.getYoutubeVideoId(response));
+            }}
+          >
+            Wathc
+          </button>
+        </>
+      )}
+
+      {listCrud.empty(matchedWords) && !wordService.isYoutubeUrl(response) && (
         <AddWord name={response} add={addWord} />
       )}
-      {error && <ErrorMessaje errorResponse={error} />}
-      {radioButtons}
-      {list}
-    </div>
+
+      {!listCrud.empty(matchedWords) && (
+        <>
+          {radioButtons} {list}
+        </>
+      )}
+    </>
   );
 }
-
-export default Home;
