@@ -11,7 +11,9 @@ export const playListService = {
   addAll(list) {
     this.list = [...list];
   },
-
+  containsInPlayList(videoUrlId) {
+    return this.list.findIndex((video) => video.url == videoUrlId) >= 0;
+  },
   getVideoUrlId(index) {
     return this.list[index].url;
   },

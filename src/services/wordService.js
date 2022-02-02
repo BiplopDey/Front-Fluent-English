@@ -10,7 +10,7 @@ export const wordService = {
     return word.split(" ").length > 3;
   },
   isYoutubeUrl(url) {
-    return url.includes("youtube.com");
+    return Boolean(this.getYoutubeVideoId(url));
   },
   getYoutubeVideoId(url) {
     var regExp =

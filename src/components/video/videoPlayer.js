@@ -22,6 +22,12 @@ export default function VideoPlayer({ currentVideo, setCurrentVideo }) {
     });
   }
 
+  function addCurrentVideoToPlayList() {
+    db.add({ url: currentVideo }).then(() => {
+      setDb({ ...db });
+    });
+  }
+
   if (loading) return <Loader />;
 
   return (
@@ -50,6 +56,15 @@ export default function VideoPlayer({ currentVideo, setCurrentVideo }) {
       >
         {collapse ? "UnCollapse" : "Collapse"}
       </button>
+      {!db.containsInPlayList(currentVideo) && (
+        <button
+          className="btn btn-outline-secondary"
+          type="button"
+          onClick={addCurrentVideoToPlayList}
+        >
+          Add to PlayList
+        </button>
+      )}
     </>
   );
 }

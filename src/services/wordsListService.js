@@ -58,15 +58,10 @@ export const wordsListService = {
   async add(word) {
     word.star = false;
     const name = word.name;
-    if (wordService.isWord(name)) {
-      word.isWord = true;
-    }
-    if (wordService.isPhrasalVerb(name)) {
-      word.isPhrasalVerb = true;
-    }
-    if (wordService.isSentence(name)) {
-      word.isSentence = true;
-    }
+    if (wordService.isWord(name)) word.isWord = true;
+    if (wordService.isPhrasalVerb(name)) word.isPhrasalVerb = true;
+    if (wordService.isSentence(name)) word.isSentence = true;
+
     const response = await this.dicctionaryRepository.create(word);
     this.list = [response, ...this.list];
   },
