@@ -12,6 +12,15 @@ export function restApiRepository(url) {
     }
   };
 
+  this.getById = async function (id) {
+    try {
+      const response = await axios.get(this.url + `/${id}`);
+      return response.data;
+    } catch (err) {
+      return err.response;
+    }
+  };
+
   this.deleteById = async function (id) {
     try {
       await axios.delete(this.url + `/${id}`);

@@ -112,6 +112,20 @@ export default function Home() {
       />
     );
 
+  const watchVideo = (
+    <>
+      <h1>Wach video</h1>
+      <button
+        onClick={() => {
+          setCurrentVideo(wordService.getYoutubeVideoId(response));
+          setResponse("");
+        }}
+      >
+        Watch
+      </button>
+    </>
+  );
+
   return (
     <>
       <Navbar />
@@ -121,19 +135,8 @@ export default function Home() {
       />
       <Search response={response} setResponse={setResponse} />
       {error && <ErrorMessaje errorResponse={error} />}
-      {wordService.isYoutubeUrl(response) && (
-        <>
-          <h1>Wach video</h1>
-          <button
-            onClick={() => {
-              setCurrentVideo(wordService.getYoutubeVideoId(response));
-              console.log(wordService.getYoutubeVideoId(response));
-            }}
-          >
-            Wathc
-          </button>
-        </>
-      )}
+
+      {wordService.isYoutubeUrl(response) && watchVideo}
 
       {listCrud.empty(matchedWords) && !wordService.isYoutubeUrl(response) && (
         <AddWord name={response} add={addWord} />

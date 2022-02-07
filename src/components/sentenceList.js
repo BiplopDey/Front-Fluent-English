@@ -4,7 +4,13 @@ import React, { useEffect, useState } from "react";
 import { wordsListService } from "../services/wordsListService";
 import Sentece from "./sentence";
 
-function SentenceList({ db, setDb, wordsList, loading, setLoading }) {
+export default function SentenceList({
+  db,
+  setDb,
+  wordsList,
+  loading,
+  setLoading,
+}) {
   function updateWord(word) {
     setLoading(true);
     db.update(word).then(() => {
@@ -61,5 +67,3 @@ function SentenceList({ db, setDb, wordsList, loading, setLoading }) {
     </table>
   );
 }
-
-export default SentenceList;
