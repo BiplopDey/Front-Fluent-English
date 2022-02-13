@@ -6,7 +6,7 @@ import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "../components/errorMessaje";
 import SentenceList from "../components/sentenceList";
 import WordList from "../components/wordList";
-import VideoPlayer from "../components/video/videoPlayer";
+import VideoPlayer from "../components/pages/home/videoPlayer";
 import { listCrud } from "../services/listCrud";
 import { wordService } from "../services/wordService";
 

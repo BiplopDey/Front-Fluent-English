@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { playListService } from "../../services/playListService";
-import Loader from "../loader";
-import Video from "../../video/video";
+import { playListService } from "../../../services/playListService";
+import Loader from "../../loader";
+import Video from "./video";
 
 export default function VideoPlayer({ currentVideo, setCurrentVideo }) {
   let [db, setDb] = useState(playListService);
