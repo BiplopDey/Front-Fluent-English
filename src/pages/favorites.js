@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
 import Search from "../components/search";
 import AddWord from "../components/addWord";
-import Words from "../components/words";
 import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "../components/errorMessaje";
 import WordList from "../components/wordList";

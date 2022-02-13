@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { restApiRepository } from "../repository/restApiRepository";
 import { urlList } from "../repository/urlList";
 import { wordsListService } from "../services/wordsListService";
-import SentenceList from "./sentenceList";
+import SentenceList from "../components/sentenceList";
 
-export default function WordProfile() {
+export default function WordView() {
   const [loading, setLoading] = useState(false);
   const [db, setDb] = useState(wordsListService);
   const [word, setWord] = useState("");
