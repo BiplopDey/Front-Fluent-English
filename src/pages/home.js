@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/navbar";
-import Search from "../components/common/search";
-import AddWord from "../components/common/addWord";
+import Search from "../components/search";
+import AddWord from "../components/addWord";
 import { wordsListService } from "../services/wordsListService";
-import ErrorMessaje from "../components/common/errorMessaje";
+import ErrorMessaje from "../components/errorMessaje";
 import SentenceList from "../components/sentenceList";
 import WordList from "../components/wordList";
 import VideoPlayer from "../components/pages/home/videoPlayer";

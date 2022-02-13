@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { wordService } from "../../services/wordService";
-import SentenseForm from "../sentenseForm";
-import WordForm from "../wordForm";
+import { wordService } from "../services/wordService";
+import SentenseForm from "./sentenseForm";
+import WordForm from "./wordForm";
 
 export default function AddWord({ name, add }) {
   const [isAdding, setIsAdding] = useState(false);

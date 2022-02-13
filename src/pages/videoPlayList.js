@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { playListService } from "../services/playListService";
-import ErrorMessaje from "../components/common/errorMessaje";
+import ErrorMessaje from "../components/errorMessaje";
 import Navbar from "../components/navbar";
-import Search from "../components/common/search";
+import Search from "../components/search";
 import VideoCard from "../components/pages/video/videoCard";
 
 export default function VideoPlayList() {
