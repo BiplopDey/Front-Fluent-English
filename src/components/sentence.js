@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import SentenseForm from "./sentenseForm";
-import WordForm from "./wordForm";
 
-function Sentece({ word, updateWord, deleteWord, toggleStar }) {
+export default function Sentece({ word, updateWord, deleteWord, toggleStar }) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
@@ -46,5 +45,3 @@ function Sentece({ word, updateWord, deleteWord, toggleStar }) {
   );
   return row;
 }
-
-export default Sentece;
