@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./navbar";
-import Search from "./search";
-import AddWord from "./addWord";
+import Navbar from "../components/navbar";
+import Search from "../components/search";
+import AddWord from "../components/addWord";
 import { wordsListService } from "../services/wordsListService";
-import ErrorMessaje from "./errorMessaje";
-import SentenceList from "./sentenceList";
-import WordList from "./wordList";
-import VideoPlayer from "./video/videoPlayer";
+import ErrorMessaje from "../components/errorMessaje";
+import SentenceList from "../components/sentenceList";
+import WordList from "../components/wordList";
+import VideoPlayer from "../components/video/videoPlayer";
 import { listCrud } from "../services/listCrud";
 import { wordService } from "../services/wordService";
 

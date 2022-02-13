@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "../App";
-import Favorites from "./favorites";
+import Favorites from "../pages/favorites";
 import VideoPlayList from "./playList/videoPlayList";
 import WordProfile from "./wordProfile";
 function Router() {

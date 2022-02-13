@@ -1,14 +1,14 @@
 import { Component } from "react";
 
 import React, { useEffect, useState } from "react";
-import Navbar from "./navbar";
-import Search from "./search";
-import AddWord from "./addWord";
-import Words from "./words";
+import Navbar from "../components/navbar";
+import Search from "../components/search";
+import AddWord from "../components/addWord";
+import Words from "../components/words";
 import { wordsListService } from "../services/wordsListService";
-import ErrorMessaje from "./errorMessaje";
-import WordList from "./wordList";
-import SentenceList from "./sentenceList";
+import ErrorMessaje from "../components/errorMessaje";
+import WordList from "../components/wordList";
+import SentenceList from "../components/sentenceList";
 
 function Favorites() {
   const [response, setResponse] = useState("");
