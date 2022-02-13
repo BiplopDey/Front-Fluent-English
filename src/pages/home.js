@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./navbar";
-import Search from "./search";
-import AddWord from "./addWord";
+import Navbar from "../components/navbar";
+import Search from "../components/search";
+import AddWord from "../components/addWord";
 import { wordsListService } from "../services/wordsListService";
-import ErrorMessaje from "./errorMessaje";
-import SentenceList from "./sentenceList";
-import WordList from "./wordList";
-import VideoPlayer from "./video/videoPlayer";
+import ErrorMessaje from "../components/errorMessaje";
+import SentenceList from "../components/sentenceList";
+import WordList from "../components/wordList";
+import VideoPlayer from "../components/pages/home/videoPlayer";
+import { listCrud } from "../services/listCrud";
+import { wordService } from "../services/wordService";
 
 const radioButtonNames = {
   words: "Words",
@@ -14,12 +16,13 @@ const radioButtonNames = {
   sentense: "Sentense",
 };
 
-function Home() {
+export default function Home() {
   const [response, setResponse] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [db, setDb] = useState(wordsListService);
   let [currentFetching, setCurrentFetching] = useState(radioButtonNames.words);
+  const [currentVideo, setCurrentVideo] = useState("");
 
   useEffect(() => {
     getAll();
@@ -86,13 +89,14 @@ function Home() {
       </button>
     </div>
   );
+  const matchedWords = db.startsWith(response);
 
   const list =
     currentFetching == radioButtonNames.sentense ? (
       <SentenceList
         setError={setError}
         db={db}
-        wordsList={db.startsWith(response)}
+        wordsList={matchedWords}
         setDb={setDb}
         loading={loading}
         setLoading={setLoading}
@@ -101,24 +105,48 @@ function Home() {
       <WordList
         setError={setError}
         db={db}
-        wordsList={db.startsWith(response)}
+        wordsList={matchedWords}
         setDb={setDb}
         loading={loading}
         setLoading={setLoading}
       />
     );
 
+  const watchVideo = (
+    <>
+      <h1>Wach video</h1>
+      <button
+        onClick={() => {
+          setCurrentVideo(wordService.getYoutubeVideoId(response));
+          setResponse("");
+        }}
+      >
+        Watch
+      </button>
+    </>
+  );
+
   return (
-    <div>
+    <>
       <Navbar />
-      <VideoPlayer videoUrl="" />
+      <VideoPlayer
+        currentVideo={currentVideo}
+        setCurrentVideo={setCurrentVideo}
+      />
       <Search response={response} setResponse={setResponse} />
-      <AddWord name={response} add={addWord} />
       {error && <ErrorMessaje errorResponse={error} />}
-      {radioButtons}
-      {list}
-    </div>
+
+      {wordService.isYoutubeUrl(response) && watchVideo}
+
+      {listCrud.empty(matchedWords) && !wordService.isYoutubeUrl(response) && (
+        <AddWord name={response} add={addWord} />
+      )}
+
+      {!listCrud.empty(matchedWords) && (
+        <>
+          {radioButtons} {list}
+        </>
+      )}
+    </>
   );
 }
-
-export default Home;

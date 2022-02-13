@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { playListService } from "../../services/playListService";
-import ErrorMessaje from "../errorMessaje";
-import Navbar from "../navbar";
-import Search from "../search";
-import VideoCard from "./videoCard";
+import { playListService } from "../services/playListService";
+import ErrorMessaje from "../components/errorMessaje";
+import Navbar from "../components/navbar";
+import Search from "../components/search";
+import VideoCard from "../components/pages/video/videoCard";
 
 export default function VideoPlayList() {
   const [response, setResponse] = useState("");
@@ -27,8 +27,15 @@ export default function VideoPlayList() {
         setError(errorResponse);
       });
   }
+
   function deleteVideo(video) {
     db.delete(video).then(() => {
+      setDb({ ...db });
+    });
+  }
+
+  function addVideo(video) {
+    db.add(video).then(() => {
       setDb({ ...db });
     });
   }
@@ -37,6 +44,15 @@ export default function VideoPlayList() {
     <>
       <Navbar />
       <Search response={response} setResponse={setResponse} />
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={() => {
+          addVideo({ url: response });
+        }}
+      >
+        Add
+      </button>
       {error && <ErrorMessaje errorResponse={error} />}
       <ul className="list-group">
         {db.list.map((video) => (

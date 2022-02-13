@@ -9,4 +9,14 @@ export const wordService = {
   isSentence(word) {
     return word.split(" ").length > 3;
   },
+  isYoutubeUrl(url) {
+    return Boolean(this.getYoutubeVideoId(url));
+  },
+  getYoutubeVideoId(url) {
+    var regExp =
+      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[7].length == 11) return match[7];
+    return false;
+  },
 };

@@ -58,19 +58,16 @@ export const wordsListService = {
   async add(word) {
     word.star = false;
     const name = word.name;
-    if (wordService.isWord(name)) {
-      word.isWord = true;
-    }
-    if (wordService.isPhrasalVerb(name)) {
-      word.isPhrasalVerb = true;
-    }
-    if (wordService.isSentence(name)) {
-      word.isSentence = true;
-    }
+    if (wordService.isWord(name)) word.isWord = true;
+    if (wordService.isPhrasalVerb(name)) word.isPhrasalVerb = true;
+    if (wordService.isSentence(name)) word.isSentence = true;
+
     const response = await this.dicctionaryRepository.create(word);
     this.list = [response, ...this.list];
   },
-
+  async getById(id) {
+    return await this.dicctionaryRepository.getById(id);
+  },
   async delete(word) {
     await this.dicctionaryRepository.deleteById(word.id);
     listCrud.delete(this.list, word);
@@ -81,12 +78,15 @@ export const wordsListService = {
     listCrud.update(this.list, response);
   },
 
+  async contains(str) {
+    return this.list.filter((word) => word.name.includes(str));
+  },
+
   isEmpty() {
     return listCrud.empty(this.list);
   },
 
   startsWith(str) {
-    //console.log(this.list);
     return str.length === 0
       ? this.list
       : this.list.filter((word) => word.name.startsWith(str));

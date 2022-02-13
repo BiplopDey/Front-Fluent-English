@@ -1,14 +1,13 @@
 import { Component } from "react";
 
 import React, { useEffect, useState } from "react";
-import Navbar from "./navbar";
-import Search from "./search";
-import AddWord from "./addWord";
-import Words from "./words";
+import Navbar from "../components/navbar";
+import Search from "../components/search";
+import AddWord from "../components/addWord";
 import { wordsListService } from "../services/wordsListService";
-import ErrorMessaje from "./errorMessaje";
-import WordList from "./wordList";
-import SentenceList from "./sentenceList";
+import ErrorMessaje from "../components/errorMessaje";
+import WordList from "../components/wordList";
+import SentenceList from "../components/sentenceList";
 
 function Favorites() {
   const [response, setResponse] = useState("");
@@ -18,14 +17,21 @@ function Favorites() {
   const [dbSentence, setDbSentence] = useState(wordsListService);
 
   useEffect(() => {
-    getFavorites(dbWord.fetchFavoritesWords());
-    getFavorites(dbSentence.fetchFavoritesSentences());
+    getFavoritesWords();
+    getFavoritesSentences();
   }, []);
 
-  function getFavorites(promise) {
+  function getFavoritesWords() {
     setLoading(true);
-    promise.then(() => {
+    dbWord.fetchFavoritesWords().then(() => {
       setDbWord({ ...dbWord });
+      setLoading(false);
+    });
+  }
+
+  function getFavoritesSentences() {
+    setLoading(true);
+    dbWord.fetchFavoritesSentences().then(() => {
       setDbSentence({ ...dbSentence });
       setLoading(false);
     });

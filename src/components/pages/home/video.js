@@ -1,8 +1,11 @@
 import React from "react";
 
-export default function Video({ embedId }) {
+export default function Video({ embedId, hide }) {
   return (
-    <div className="video-responsive">
+    <div
+      className="video-responsive"
+      style={{ display: hide ? "none" : "block" }}
+    >
       <iframe
         width="853"
         height="480"
