@@ -14,7 +14,7 @@ export default function Sentece({ word, updateWord, deleteWord, toggleStar }) {
     );
   }
 
-  const row = (
+  return (
     <tr>
       <th scope="row">{word.id}</th>
       <td>{word.name}</td>
@@ -43,5 +43,4 @@ export default function Sentece({ word, updateWord, deleteWord, toggleStar }) {
       </td>
     </tr>
   );
-  return row;
 }
