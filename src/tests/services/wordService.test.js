@@ -21,6 +21,7 @@ beforeAll(() => {
     { ...fakeWord, id: 3 },
     wordDto(1, "Hola", "t", "d", false, false),
   ];
+
   repository = function () {
     this.fetchAll = async () =>
       new Promise((resolve, reject) => {
@@ -31,25 +32,34 @@ beforeAll(() => {
         resolve({ ...word, id: 1 });
       });
   };
+
   service = new WordService(new repository());
 });
 
 test("can fetch all data", async () => {
-  const data = await service.fetchAll();
+  const data = await service.all();
+
   expect(data).toEqual(fakeWordList);
 });
 
-test("can add a word", async () => {
+test("can create a word", async () => {
   const wordInput = { name: "hola" };
-  const wordObject = new Word(
+  const wDto = new Word(
     null,
     wordInput.name,
     wordInput.transcription,
     wordInput.definition,
     wordInput.favorite
-  );
-  const wDto = wordObject.toDto(); //
+  ).toDto();
 
-  const wordAdded = await service.addWord(wDto);
-  expect(wordAdded).toEqual({ ...wDto, id: 1 });
+  const wordAdded = await service.create(wDto);
+
+  expect(wordAdded).toEqual({
+    id: 1,
+    name: "Hola",
+    transcription: "",
+    definition: "",
+    favorite: false,
+    isPhrasalVerb: false,
+  });
 });

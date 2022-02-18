@@ -1,9 +1,15 @@
 export default function WordService(repository) {
-  this.fetchAll = async function () {
+  this.all = async function () {
     return await repository.fetchAll();
   };
-  this.addWord = async function (word) {
-    return await repository.save(word);
+  this.create = async function (wordDto) {
+    return await repository.save(wordDto);
+  };
+  this.update = async function (wordDto) {
+    return await repository.save(wordDto);
+  };
+  this.get = async function (id) {
+    return await repository.get(id);
   };
 }
 
