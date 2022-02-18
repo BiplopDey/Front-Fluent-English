@@ -1,3 +1,9 @@
+export default function WordService(repository) {
+  this.fetchAll = async function () {
+    return await repository.fetchAll();
+  };
+}
+
 export const wordService = {
   isPhrasalVerb(word) {
     const length = word.split(" ").length;
