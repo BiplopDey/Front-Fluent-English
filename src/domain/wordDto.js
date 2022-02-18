@@ -3,13 +3,16 @@ export default function wordDto(
   name,
   transcription,
   definition,
-  isPhrasalVerb
+  isPhrasalVerb,
+  favorite
 ) {
-  return {
-    id: id,
+  const word = {
     name: name,
     transcription: transcription,
     definition: definition,
     isPhrasalVerb: isPhrasalVerb,
+    favorite: favorite,
   };
+
+  return id === null ? word : { ...word, id: id };
 }

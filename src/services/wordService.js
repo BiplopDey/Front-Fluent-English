@@ -2,6 +2,9 @@ export default function WordService(repository) {
   this.fetchAll = async function () {
     return await repository.fetchAll();
   };
+  this.addWord = async function (word) {
+    return await repository.save(word);
+  };
 }
 
 export const wordService = {
