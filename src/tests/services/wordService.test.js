@@ -1,29 +1,33 @@
 import Word from "../../domain/Word";
+import wordDto from "../../domain/wordDto";
 import WordService from "../../services/wordService";
 
 test("can fetch all data", async () => {
   const fakeWord = {
     id: 1,
-    name: "hola",
+    name: "Hola",
     transcription: "tt",
-    description: "dd",
+    definition: "dd",
+    isPhrasalVerb: false,
   };
   const fakeWordList = [
     fakeWord,
     { ...fakeWord, id: 2, name: "hola2" },
     { ...fakeWord, id: 3 },
+    wordDto(1, "Hola", "t", "d", false),
   ];
-  const repository = jest.fn(function () {
+  const repository = function () {
     this.fetchAll = async () =>
       new Promise((resolve, reject) => {
         resolve(fakeWordList);
       });
-  });
+  };
 
   const service = new WordService(new repository());
   const data = await service.fetchAll();
   expect(data).toBe(fakeWordList);
+});
 
-  //   const data = await new repository().fetchAll();
-  //   expect(data).toBe(wordList);
+test("can add a word", () => {
+  const wordToAss = { name: "hola" };
 });
