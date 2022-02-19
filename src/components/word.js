@@ -27,6 +27,7 @@ export default function Word({ word, updateWord, deleteWord, toggleStar }) {
           onClick={() => {
             setIsEditing(true);
           }}
+          data-testid="toggle"
         >
           Edit
         </button>

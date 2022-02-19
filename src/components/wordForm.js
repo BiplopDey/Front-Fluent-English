@@ -66,6 +66,7 @@ function WordForm({ word, operation, setDisplay }) {
           type="button"
           className="btn btn-primary"
           onClick={cancelEditing}
+          data-testid="toggle"
         >
           Cancel
         </button>
