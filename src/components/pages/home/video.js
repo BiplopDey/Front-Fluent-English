@@ -1,3 +1,4 @@
+import "../../../styles/components/video.css";
 import React from "react";
 
 export default function Video({ embedId, hide }) {

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { restApiRepository } from "../repository/restApiRepository";
-import { urlList } from "../repository/urlList";
 import { wordsListService } from "../services/wordsListService";
 import SentenceList from "../components/sentenceList";
 

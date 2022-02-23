@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import SentenseForm from "./sentenseForm";
-import WordForm from "./wordForm";
 
-function Sentece({ word, updateWord, deleteWord, toggleStar }) {
+export default function Sentece({ word, updateWord, deleteWord, toggleStar }) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
@@ -15,7 +14,7 @@ function Sentece({ word, updateWord, deleteWord, toggleStar }) {
     );
   }
 
-  const row = (
+  return (
     <tr>
       <th scope="row">{word.id}</th>
       <td>{word.name}</td>
@@ -44,7 +43,4 @@ function Sentece({ word, updateWord, deleteWord, toggleStar }) {
       </td>
     </tr>
   );
-  return row;
 }
-
-export default Sentece;

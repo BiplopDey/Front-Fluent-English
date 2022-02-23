@@ -1,7 +1,5 @@
 import Loader from "./loader";
-import Word from "./word";
 import React, { useEffect, useState } from "react";
-import { wordsListService } from "../services/wordsListService";
 import Sentece from "./sentence";
 
 export default function SentenceList({

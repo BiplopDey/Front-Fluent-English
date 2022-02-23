@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import WordForm from "./wordForm";
 
-function Word({ word, updateWord, deleteWord, toggleStar }) {
+export default function Word({ word, updateWord, deleteWord, toggleStar }) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
@@ -10,7 +10,7 @@ function Word({ word, updateWord, deleteWord, toggleStar }) {
     );
   }
 
-  const row = (
+  return (
     <tr>
       <th scope="row">{word.id}</th>
       <td>{word.name}</td>
@@ -27,6 +27,7 @@ function Word({ word, updateWord, deleteWord, toggleStar }) {
           onClick={() => {
             setIsEditing(true);
           }}
+          data-testid="toggle"
         >
           Edit
         </button>
@@ -41,7 +42,4 @@ function Word({ word, updateWord, deleteWord, toggleStar }) {
       </td>
     </tr>
   );
-  return row;
 }
-
-export default Word;
