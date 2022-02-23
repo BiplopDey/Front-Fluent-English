@@ -1,9 +1,9 @@
 import React from "react";
 
-function ErrorMessaje(props) {
+function ErrorMessaje({ error }) {
   return (
     <div className="alert alert-danger" role="alert">
-      {props.errorResponse.data}
+      {error.message}
     </div>
   );
 }

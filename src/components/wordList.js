@@ -1,41 +1,32 @@
 import Loader from "./loader";
 import Word from "./word";
 import React, { useEffect, useState } from "react";
+import { listCrud } from "../services/listCrud";
+import useFetchData from "../hooks/useFetchData";
+import ErrorMessaje from "./errorMessaje";
 
-export default function WordList({
-  db,
-  setDb,
-  wordsList,
-  loading,
-  setLoading,
-}) {
-  function updateWord(word) {
-    setLoading(true);
-    db.update(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
-  }
+export default function WordList({ service, list }) {
+  let [fetchResponse, error, loading, setPromise] = useFetchData(null);
 
   function deleteWord(word) {
-    setLoading(true);
-    db.delete(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
+    setPromise(service.deleteById(word));
+    listCrud.delete(list, word);
+  }
+
+  function updateWord(word) {
+    setPromise(service.update(word));
+    listCrud.update(list, word);
   }
 
   function toggleStar(word) {
-    setLoading(true);
-    db.toggleStar(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
+    setPromise(service.toggleStar(word));
+    listCrud.update(list, word);
   }
 
   if (loading) return <Loader />;
+  if (error) return <ErrorMessaje />;
 
-  if (db.isEmpty())
+  if (listCrud.empty(list))
     return (
       <ul>
         <li>No data</li>
@@ -54,7 +45,7 @@ export default function WordList({
         </tr>
       </thead>
       <tbody>
-        {wordsList.map((word) => (
+        {list.map((word) => (
           <Word
             key={word.id}
             deleteWord={deleteWord}

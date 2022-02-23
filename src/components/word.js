@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import WordForm from "./wordForm";
 
-export default function Word({ word, updateWord, deleteWord, toggleStar }) {
+export default function Word({ word, deleteWord, updateWord, toggleStar }) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
@@ -18,7 +18,7 @@ export default function Word({ word, updateWord, deleteWord, toggleStar }) {
       <td>{word.definition}</td>
       <td>
         <i
-          className={word.star ? "bi bi-star-fill" : "bi bi-star"}
+          className={word.favorite ? "bi bi-star-fill" : "bi bi-star"}
           onClick={() => toggleStar(word)}
         ></i>
         <button

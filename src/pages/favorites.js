@@ -7,34 +7,19 @@ import { wordsListService } from "../services/wordsListService";
 import ErrorMessaje from "../components/errorMessaje";
 import WordList from "../components/wordList";
 import SentenceList from "../components/sentenceList";
+import WordService from "../services/wordService";
+import wordApiRepository from "../repository/wordApiRepository";
+import useFetchData from "../hooks/useFetchData";
+import { listCrud } from "../services/listCrud";
+import Loader from "../components/loader";
 
 function Favorites() {
   const [response, setResponse] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [dbWord, setDbWord] = useState(wordsListService);
-  const [dbSentence, setDbSentence] = useState(wordsListService);
+  const wordService = new WordService(new wordApiRepository());
+  let [wordsList, error, loading] = useFetchData(wordService.all());
 
-  useEffect(() => {
-    getFavoritesWords();
-    getFavoritesSentences();
-  }, []);
-
-  function getFavoritesWords() {
-    setLoading(true);
-    dbWord.fetchFavoritesWords().then(() => {
-      setDbWord({ ...dbWord });
-      setLoading(false);
-    });
-  }
-
-  function getFavoritesSentences() {
-    setLoading(true);
-    dbWord.fetchFavoritesSentences().then(() => {
-      setDbSentence({ ...dbSentence });
-      setLoading(false);
-    });
-  }
+  if (loading) return <Loader />;
+  if (error) return <ErrorMessaje />;
 
   return (
     <div>
@@ -43,20 +28,17 @@ function Favorites() {
       {error && <ErrorMessaje errorResponse={error} />}
       <h2>Words</h2>
       <WordList
-        db={dbWord}
-        setDb={setDbWord}
-        loading={loading}
-        setLoading={setLoading}
-        wordsList={dbWord.list}
+        service={wordService}
+        list={listCrud.wordListstartsWith(wordsList, response)}
       />
       <h2>Sentences</h2>
-      <SentenceList
+      {/* <SentenceList
         db={dbSentence}
         setDb={setDbSentence}
         loading={loading}
-        setLoading={setLoading}
+        //  setLoading={setLoading}
         wordsList={dbSentence.list}
-      />
+      /> */}
     </div>
   );
 }

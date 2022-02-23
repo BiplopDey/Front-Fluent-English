@@ -11,6 +11,13 @@ export default function WordService(repository) {
   this.get = async function (id) {
     return await repository.get(id);
   };
+  this.deleteById = async function (id) {
+    return await repository.deleteById(id);
+  };
+  this.toggleStar = async function (word) {
+    word.favorite = !word.favorite;
+    return await this.update(word);
+  };
 }
 
 export const wordService = {

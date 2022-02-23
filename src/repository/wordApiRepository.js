@@ -3,7 +3,7 @@ import wordDto from "../domain/wordDto";
 import { urlList } from "./urlList";
 
 export default function wordApiRepository() {
-  const url = urlList.dicctionary;
+  const url = urlList.words;
   this.fetchAll = async () => {
     const response = await axios.get(url);
     return response.data.map((w) =>
@@ -32,9 +32,11 @@ export default function wordApiRepository() {
       w.favorite
     );
   };
+
   this.deleteById = async (id) => {
     await axios.delete(url + `/${id}`);
   };
+
   this.get = async (id) => {
     return await axios.get(url + `/${id}`);
   };

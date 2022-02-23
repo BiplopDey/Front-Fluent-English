@@ -14,4 +14,10 @@ export const listCrud = {
   empty(list) {
     return list.length === 0;
   },
+
+  wordListstartsWith(list, str) {
+    return str.length === 0
+      ? list
+      : list.filter((word) => word.name.startsWith(str));
+  },
 };

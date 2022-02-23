@@ -3,10 +3,8 @@ import { useEffect, useState } from "react";
 export default function useFetchData(fetchPromise) {
   const [promise, setPromise] = useState(fetchPromise);
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(() =>
-    fetchPromise ? null : "no promise given"
-  );
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   if (promise) {
     fetchData();
@@ -14,6 +12,7 @@ export default function useFetchData(fetchPromise) {
   }
 
   function fetchData() {
+    setLoading(true);
     promise
       .then((dt) => {
         setData(dt);
@@ -22,5 +21,5 @@ export default function useFetchData(fetchPromise) {
       .finally(() => setLoading(false));
   }
 
-  return [loading, data, error, setPromise];
+  return [data, error, loading, setPromise];
 }
