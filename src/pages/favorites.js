@@ -28,7 +28,7 @@ function Favorites() {
       {error && <ErrorMessaje errorResponse={error} />}
       <h2>Words</h2>
       <WordList
-        service={wordService}
+        wordService={wordService}
         list={listCrud.wordListstartsWith(wordsList, response)}
       />
       <h2>Sentences</h2>

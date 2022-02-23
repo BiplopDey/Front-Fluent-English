@@ -8,7 +8,9 @@ import SentenceList from "../components/sentenceList";
 import WordList from "../components/wordList";
 import VideoPlayer from "../components/pages/home/videoPlayer";
 import { listCrud } from "../services/listCrud";
-import { wordService } from "../services/wordService";
+import WordService, { wordService } from "../services/wordService";
+import wordApiRepository from "../repository/wordApiRepository";
+import useFetchData from "../hooks/useFetchData";
 
 const radioButtonNames = {
   words: "Words",
@@ -23,6 +25,9 @@ export default function Home() {
   const [db, setDb] = useState(wordsListService);
   let [currentFetching, setCurrentFetching] = useState(radioButtonNames.words);
   const [currentVideo, setCurrentVideo] = useState("");
+
+  const wordServicing = new WordService(new wordApiRepository());
+  let [wordsList, wordError, wordLoading] = useFetchData(wordServicing.all());
 
   useEffect(() => {
     getAll();
@@ -102,14 +107,7 @@ export default function Home() {
         setLoading={setLoading}
       />
     ) : (
-      <WordList
-        setError={setError}
-        db={db}
-        wordsList={matchedWords}
-        setDb={setDb}
-        loading={loading}
-        setLoading={setLoading}
-      />
+      <WordList list={matchedWords} wordService={wordServicing} />
     );
 
   const watchVideo = (

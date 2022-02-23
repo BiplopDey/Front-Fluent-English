@@ -1,25 +1,25 @@
 import Loader from "./loader";
 import Word from "./word";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { listCrud } from "../services/listCrud";
 import useFetchData from "../hooks/useFetchData";
 import ErrorMessaje from "./errorMessaje";
 
-export default function WordList({ service, list }) {
+export default function WordList({ wordService, list }) {
   let [fetchResponse, error, loading, setPromise] = useFetchData(null);
 
   function deleteWord(word) {
-    setPromise(service.deleteById(word));
+    setPromise(wordService.deleteById(word));
     listCrud.delete(list, word);
   }
 
   function updateWord(word) {
-    setPromise(service.update(word));
+    setPromise(wordService.update(word));
     listCrud.update(list, word);
   }
 
   function toggleStar(word) {
-    setPromise(service.toggleStar(word));
+    setPromise(wordService.toggleStar(word));
     listCrud.update(list, word);
   }
 
