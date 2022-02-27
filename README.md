@@ -29,7 +29,7 @@ npm test
 - Implement integration test.
 - Implement hexagonal arquitecuture.
 
-## Things you have to know before writing code
+## Things you have to know before contributing
 - React's component lifecycle
 - Reack hooks, useEffect, useState and custom hooks
 - Error handling
