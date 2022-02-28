@@ -25,7 +25,7 @@ npm test
 ```
 
 ## Future improvements
-- Create a local storage repository to persist if user is offline.
+- Create a local storage repository to persist if user is not registred.
 - Implement integration test.
 - Implement hexagonal arquitecuture.
 
