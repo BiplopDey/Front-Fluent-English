@@ -3,14 +3,14 @@ export default function wordDto(
   name,
   transcription,
   definition,
-  isPhrasalVerb,
+  phrasalVerb,
   favorite
 ) {
   const word = {
     name: name,
     transcription: transcription,
     definition: definition,
-    isPhrasalVerb: isPhrasalVerb,
+    phrasalVerb: phrasalVerb,
     favorite: favorite,
   };
 

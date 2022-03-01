@@ -27,7 +27,8 @@ export default function Home() {
   const [currentVideo, setCurrentVideo] = useState("");
 
   const wordServicing = new WordService(new wordApiRepository());
-  let [wordsList, wordError, wordLoading] = useFetchData(wordServicing.all());
+  let [wordsList, wordError, wordLoading, setPromise, setWordList] =
+    useFetchData(wordServicing.all());
 
   useEffect(() => {
     getAll();
@@ -107,7 +108,10 @@ export default function Home() {
         setLoading={setLoading}
       />
     ) : (
-      <WordList list={matchedWords} wordService={wordServicing} />
+      <WordList
+        list={listCrud.wordListstartsWith(wordsList, response)}
+        wordService={wordServicing}
+      />
     );
 
   const watchVideo = (

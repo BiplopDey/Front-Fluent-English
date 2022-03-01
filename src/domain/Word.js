@@ -6,7 +6,7 @@ export default class Word {
     this.id = id;
     let wn = wordName(name);
     this.name = wn.name;
-    this.isPhrasalVerb = wn.isPhrasalVerb;
+    this.phrasalVerb = wn.isPhrasalVerb;
     this.transcription = transcription ? transcription : "";
     this.definition = definition ? definition : "";
     this.favorite = favorite ? true : false;
@@ -17,7 +17,7 @@ export default class Word {
       this.name,
       this.transcription,
       this.definition,
-      this.isPhrasalVerb,
+      this.phrasalVerb,
       this.favorite
     );
   }

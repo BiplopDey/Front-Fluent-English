@@ -20,4 +20,8 @@ export const listCrud = {
       ? list
       : list.filter((word) => word.name.startsWith(str));
   },
+
+  getPhrasalVerb(list) {
+    return list.filter((e) => e.phrasalVerb);
+  },
 };

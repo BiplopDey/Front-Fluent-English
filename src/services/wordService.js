@@ -18,6 +18,9 @@ export default function WordService(repository) {
     word.favorite = !word.favorite;
     return await this.update(word);
   };
+  this.getPhrasalVerb = async function (list) {
+    return list.filter((e) => e.phrasalVerb);
+  };
 }
 
 export const wordService = {
