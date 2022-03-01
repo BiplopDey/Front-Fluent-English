@@ -21,6 +21,12 @@ export const listCrud = {
       : list.filter((word) => word.name.startsWith(str));
   },
 
+  sentenceListStartsWith(list, str) {
+    return str.length === 0
+      ? list
+      : list.filter((sentence) => sentence.sentence.startsWith(str));
+  },
+
   getPhrasalVerb(list) {
     return list.filter((e) => e.phrasalVerb);
   },

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import InputText from "./inputText";
 
-function SentenseForm({ word, operation, setDisplay }) {
-  const [wordState, setWord] = useState({ ...word });
+function SentenseForm({ sentence, operation, setDisplay }) {
+  const [sentenceState, setSentence] = useState({ ...sentence });
 
   function addWord() {
-    operation(wordState);
+    operation(sentenceState);
     setDisplay(false);
   }
 
   function updateChangeName(event) {
-    setWord({
-      ...wordState,
+    setSentence({
+      ...sentenceState,
       name: event.target.value,
     });
   }
@@ -26,7 +26,7 @@ function SentenseForm({ word, operation, setDisplay }) {
       <td>
         <InputText
           name="Name"
-          state={wordState.name}
+          state={sentenceState.name}
           stateUpdate={updateChangeName}
         />
       </td>

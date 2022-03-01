@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import SentenseForm from "./sentenseForm";
 
-export default function Sentece({ word, updateWord, deleteWord, toggleStar }) {
+export default function Sentece({
+  sentence,
+  update,
+  deleteSentence,
+  toggleStar,
+}) {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
     return (
       <SentenseForm
-        word={word}
-        operation={updateWord}
+        sentence={sentence}
+        operation={update}
         setDisplay={setIsEditing}
       />
     );
@@ -16,12 +21,12 @@ export default function Sentece({ word, updateWord, deleteWord, toggleStar }) {
 
   return (
     <tr>
-      <th scope="row">{word.id}</th>
-      <td>{word.name}</td>
+      <th scope="row">{sentence.id}</th>
+      <td>{sentence.sentence}</td>
       <td>
         <i
-          className={word.star ? "bi bi-star-fill" : "bi bi-star"}
-          onClick={() => toggleStar(word)}
+          className={sentence.favorite ? "bi bi-star-fill" : "bi bi-star"}
+          onClick={() => toggleStar(sentence)}
         ></i>
         <button
           type="button"
@@ -36,7 +41,7 @@ export default function Sentece({ word, updateWord, deleteWord, toggleStar }) {
         <button
           type="button"
           className="btn btn-danger btn-sm"
-          onClick={() => deleteWord(word)}
+          onClick={() => deleteSentence(sentence)}
         >
           Delete
         </button>

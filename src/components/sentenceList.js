@@ -1,41 +1,32 @@
 import Loader from "./loader";
 import React, { useEffect, useState } from "react";
 import Sentece from "./sentence";
+import { listCrud } from "../services/listCrud";
+import ErrorMessaje from "./errorMessaje";
+import useFetchData from "../hooks/useFetchData";
 
-export default function SentenceList({
-  db,
-  setDb,
-  wordsList,
-  loading,
-  setLoading,
-}) {
-  function updateWord(word) {
-    setLoading(true);
-    db.update(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
+export default function SentenceList({ sentenceService, list }) {
+  let [fetchResponse, error, loading, setPromise] = useFetchData(null);
+
+  function deleteSentence(sentence) {
+    setPromise(sentenceService.deleteById(sentence));
+    listCrud.delete(list, sentence);
   }
 
-  function deleteWord(word) {
-    setLoading(true);
-    db.delete(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
+  function update(sentence) {
+    setPromise(sentenceService.update(sentence));
+    listCrud.update(list, sentence);
   }
 
-  function toggleStar(word) {
-    setLoading(true);
-    db.toggleStar(word).then(() => {
-      setDb({ ...db });
-      setLoading(false);
-    });
+  function toggleStar(sentence) {
+    setPromise(sentenceService.toggleStar(sentence));
+    listCrud.update(list, sentence);
   }
 
   if (loading) return <Loader />;
+  if (error) return <ErrorMessaje error={error} />;
 
-  if (db.isEmpty())
+  if (listCrud.empty(list))
     return (
       <ul>
         <li>No data</li>
@@ -52,13 +43,13 @@ export default function SentenceList({
         </tr>
       </thead>
       <tbody>
-        {wordsList.map((word) => (
+        {list.map((sentence) => (
           <Sentece
-            key={word.id}
-            deleteWord={deleteWord}
+            key={sentence.id}
+            deleteSentence={deleteSentence}
             toggleStar={toggleStar}
-            word={word}
-            updateWord={updateWord}
+            sentence={sentence}
+            update={update}
           />
         ))}
       </tbody>

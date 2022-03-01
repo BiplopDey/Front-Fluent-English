@@ -12,13 +12,19 @@ import wordApiRepository from "../repository/wordApiRepository";
 import useFetchData from "../hooks/useFetchData";
 import { listCrud } from "../services/listCrud";
 import Loader from "../components/loader";
+import sentenceApiRepository from "../repository/sentenceApiRepository";
+import SentenceService from "../services/sentenceService";
 
 function Favorites() {
   const [response, setResponse] = useState("");
   const wordService = new WordService(new wordApiRepository());
+  const sentenceService = new SentenceService(new sentenceApiRepository());
+  let [sentenceList, errorSentence, loadingSentence] = useFetchData(
+    sentenceService.all()
+  );
   let [wordsList, error, loading] = useFetchData(wordService.all());
 
-  if (loading) return <Loader />;
+  if (loading || loadingSentence) return <Loader />;
   if (error) return <ErrorMessaje />;
 
   return (
@@ -32,13 +38,10 @@ function Favorites() {
         list={listCrud.wordListstartsWith(wordsList, response)}
       />
       <h2>Sentences</h2>
-      {/* <SentenceList
-        db={dbSentence}
-        setDb={setDbSentence}
-        loading={loading}
-        //  setLoading={setLoading}
-        wordsList={dbSentence.list}
-      /> */}
+      <SentenceList
+        sentenceService={sentenceService}
+        list={listCrud.sentenceListStartsWith(sentenceList, response)}
+      />
     </div>
   );
 }
