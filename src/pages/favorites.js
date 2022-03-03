@@ -47,7 +47,7 @@ function Favorites() {
         setDb={setDbWord}
         loading={loading}
         setLoading={setLoading}
-        wordsList={dbWord.list}
+        wordsList={dbWord.startsWith(response)}
       />
       <h2>Sentences</h2>
       <SentenceList
@@ -55,7 +55,7 @@ function Favorites() {
         setDb={setDbSentence}
         loading={loading}
         setLoading={setLoading}
-        wordsList={dbSentence.list}
+        wordsList={dbSentence.startsWith(response)}
       />
     </div>
   );

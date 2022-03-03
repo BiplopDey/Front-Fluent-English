@@ -62,7 +62,11 @@ export default function Home() {
   }
 
   const radioButtons = (
-    <div className="btn-group" role="group" aria-label="Basic outlined example">
+    <div
+      className="btn-group col-md-8 offset-md-2"
+      role="group"
+      aria-label="Basic outlined example"
+    >
       <button
         type="button"
         name={radioButtonNames.words}
@@ -144,7 +148,8 @@ export default function Home() {
 
       {!listCrud.empty(matchedWords) && (
         <>
-          {radioButtons} {list}
+          <div className="row">{radioButtons}</div>
+          {list}
         </>
       )}
     </>

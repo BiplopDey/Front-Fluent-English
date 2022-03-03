@@ -29,23 +29,21 @@ export default function VideoPlayer({ currentVideo, setCurrentVideo }) {
   }
 
   if (loading) return <Loader />;
-
-  return (
+  const buttons = (
     <>
-      <Video embedId={currentVideo} hide={collapse} />
       <button
         className="btn btn-outline-secondary"
         type="button"
         onClick={() => setCurrentVideo(db.prevVideo())}
       >
-        Prev
+        <i className="bi bi-caret-left-fill"></i>
       </button>
       <button
         className="btn btn-outline-secondary"
         type="button"
         onClick={() => setCurrentVideo(db.nextVideo())}
       >
-        Next
+        <i className="bi bi-caret-right-fill"></i>
       </button>
       <button
         className="btn btn-outline-secondary"
@@ -54,7 +52,9 @@ export default function VideoPlayer({ currentVideo, setCurrentVideo }) {
           setCollapse(!collapse);
         }}
       >
-        {collapse ? "UnCollapse" : "Collapse"}
+        <i
+          className={collapse ? "bi bi-arrows-expand" : "bi bi-arrows-collapse"}
+        ></i>
       </button>
       {!db.containsInPlayList(currentVideo) && (
         <button
@@ -66,5 +66,16 @@ export default function VideoPlayer({ currentVideo, setCurrentVideo }) {
         </button>
       )}
     </>
+  );
+  return (
+    <div className="mb-2">
+      <Video embedId={currentVideo} hide={collapse} />
+
+      <div className="container">
+        <div className="row">
+          <div className="col text-center">{buttons}</div>
+        </div>
+      </div>
+    </div>
   );
 }

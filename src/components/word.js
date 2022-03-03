@@ -29,7 +29,7 @@ export default function Word({ word, updateWord, deleteWord, toggleStar }) {
           }}
           data-testid="toggle"
         >
-          Edit
+          <i className="bi bi-pencil-square"></i>
         </button>
 
         <button
@@ -37,7 +37,7 @@ export default function Word({ word, updateWord, deleteWord, toggleStar }) {
           className="btn btn-danger btn-sm"
           onClick={() => deleteWord(word)}
         >
-          Delete
+          X
         </button>
       </td>
     </tr>
