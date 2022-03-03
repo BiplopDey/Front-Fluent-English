@@ -11,6 +11,8 @@ import { listCrud } from "../services/listCrud";
 import WordService, { wordService } from "../services/wordService";
 import wordApiRepository from "../repository/wordApiRepository";
 import useFetchData from "../hooks/useFetchData";
+import SentenceService from "../services/sentenceService";
+import sentenceApiRepository from "../repository/sentenceApiRepository";
 
 const radioButtonNames = {
   words: "Words",
@@ -19,25 +21,30 @@ const radioButtonNames = {
 };
 
 export default function Home() {
+  const wordServicing = new WordService(new wordApiRepository());
+  const sentenceService = new SentenceService(new sentenceApiRepository());
   const [response, setResponse] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [db, setDb] = useState(wordsListService);
+  //  const [error, setError] = useState(null);
+  //  const [loading, setLoading] = useState(false);
+  //  const [db, setDb] = useState(wordsListService);
   let [currentFetching, setCurrentFetching] = useState(radioButtonNames.words);
   const [currentVideo, setCurrentVideo] = useState("");
-
-  const wordServicing = new WordService(new wordApiRepository());
-  let [wordsList, wordError, wordLoading, setPromise, setWordList] =
-    useFetchData(wordServicing.all());
-
-  useEffect(() => {
-    getAll();
-  }, [currentFetching]);
+  let [wordsList, wordError, wordLoading, fetchWord] = useFetchData(
+    wordServicing.all()
+  );
+  let [sentenceList, sentenceError, sentenceLoading, fetchSentence] =
+    useFetchData(null);
 
   function setFetch(event) {
     currentFetching = event.target.name;
     setCurrentFetching(currentFetching);
   }
+  /*
+  useEffect(() => {
+    getAll();
+  }, [currentFetching]);
+
+  
 
   function fetch() {
     if (currentFetching == radioButtonNames.words) return db.fetchWords(); // returns a promise
@@ -58,13 +65,14 @@ export default function Home() {
         setError(errorResponse);
       });
   }
-
+*/
   function addWord(word) {
+    /*
     setLoading(true);
     db.add(word).then(() => {
       setDb({ ...db });
       setLoading(false);
-    });
+    });*/
   }
 
   const radioButtons = (
@@ -72,7 +80,10 @@ export default function Home() {
       <button
         type="button"
         name={radioButtonNames.words}
-        onClick={setFetch}
+        onClick={() => {
+          setFetch();
+          fetchWord(wordServicing.all());
+        }}
         className="btn btn-outline-primary"
       >
         {radioButtonNames.words}
@@ -95,18 +106,12 @@ export default function Home() {
       </button>
     </div>
   );
+
   const matchedWords = db.startsWith(response);
 
   const list =
     currentFetching == radioButtonNames.sentense ? (
-      <SentenceList
-        setError={setError}
-        db={db}
-        wordsList={matchedWords}
-        setDb={setDb}
-        loading={loading}
-        setLoading={setLoading}
-      />
+      <SentenceList list={sentenceList} sentenceService={sentenceService} />
     ) : (
       <WordList
         list={listCrud.wordListstartsWith(wordsList, response)}

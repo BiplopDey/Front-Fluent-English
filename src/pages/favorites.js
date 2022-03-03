@@ -25,7 +25,7 @@ function Favorites() {
   let [wordsList, error, loading] = useFetchData(wordService.all());
 
   if (loading || loadingSentence) return <Loader />;
-  if (error) return <ErrorMessaje />;
+  if (error) return <ErrorMessaje error={error} />;
 
   return (
     <div>
