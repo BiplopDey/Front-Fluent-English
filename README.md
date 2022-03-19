@@ -10,7 +10,7 @@ You can select a youtube video to practice, and in below there is a list of the 
 - Can see favorites words and sentences.
 - Can do CRUD of words and senteces, and add to favorites.
 - Can add youtube videos in your play list and play them in a loop.
-- Uses Rest Api to comunicate with back-end in Spring boot.
+- Uses Rest Api to comunicate with [back-end in Spring boot](https://github.com/BiplopDey/Back-Fluent-English).
 
 ## Stack
 - Programming language: Javascript
