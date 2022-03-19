@@ -1,0 +1,104 @@
+{
+  "words": [
+    {
+      "name": "dad",
+      "transcription": "dws",
+      "definition": "dasa",
+      "favorite": false,
+      "id": 2
+    },
+    {
+      "name": "dadd",
+      "transcription": "d",
+      "definition": "da",
+      "favorite": true,
+      "id": 3
+    },
+    {
+      "name": "faa",
+      "transcription": "d",
+      "definition": "da",
+      "favorite": true,
+      "id": 4,
+      "star": true
+    }
+  ],
+  "sentences": [
+    {
+      "sentence": "da dad addv dadf",
+      "favorite": false,
+      "id": 1
+    },
+    {
+      "sentence": "hello world",
+      "favorite": true,
+      "id": 2
+    },
+    {
+      "sentence": "hola world",
+      "favorite": true,
+      "id": 3
+    },
+    {
+      "sentence": "hola mundo",
+      "favorite": true,
+      "id": 4
+    }
+  ],
+  "dicctionary": [
+    {
+      "name": "A new sentence example",
+      "star": true,
+      "isSentence": true,
+      "id": 1
+    },
+    {
+      "name": "a phrasal verbo",
+      "star": false,
+      "isPhrasalVerb": true,
+      "id": 2
+    },
+    {
+      "name": "wording",
+      "star": false,
+      "isWord": true,
+      "id": 3
+    },
+    {
+      "name": "phrasal vetrbs",
+      "star": true,
+      "isPhrasalVerb": true,
+      "id": 4
+    }
+  ],
+  "videos": [
+    {
+      "url": "t2ypzz6gJm0",
+      "id": 1
+    },
+    {
+      "url": "TlP5WIxVirU",
+      "id": 2
+    },
+    {
+      "url": "THL1OPn72vo",
+      "id": 3
+    },
+    {
+      "url": "_AyFP5s69N4",
+      "id": 4
+    },
+    {
+      "url": "0ZJgIjIuY7U",
+      "id": 5
+    },
+    {
+      "url": "hQAHSlTtcmY",
+      "id": 6
+    },
+    {
+      "url": "WbRDkJ4lPdY",
+      "id": 7
+    }
+  ]
+}
